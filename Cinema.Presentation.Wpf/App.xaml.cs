@@ -22,6 +22,8 @@ namespace Cinema.Presentation.Wpf
                             scanner.WithDefaultConventions();
                         });
                     configurator.For<IViewModelFactory>().CreateFactory();
+                    configurator.For<AddFilmViewModel>().Use<AddFilmViewModel>();
+                    configurator.For<FilmListViewModel>().Use<FilmListViewModel>();
                     configurator.For<FilmViewModel>().Use<FilmViewModel>();
                 }
             );
