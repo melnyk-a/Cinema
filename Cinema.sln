@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Presentation.Wpf", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Domain.Models", "Cinema.Domain.Models\Cinema.Domain.Models.csproj", "{875DF3A0-6277-433D-9418-A99877B391E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Data.Stub", "Cinema.Data.Stub\Cinema.Data.Stub.csproj", "{70548357-C2C0-4B2B-A707-CE913741B97A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{875DF3A0-6277-433D-9418-A99877B391E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{875DF3A0-6277-433D-9418-A99877B391E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{875DF3A0-6277-433D-9418-A99877B391E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70548357-C2C0-4B2B-A707-CE913741B97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70548357-C2C0-4B2B-A707-CE913741B97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70548357-C2C0-4B2B-A707-CE913741B97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70548357-C2C0-4B2B-A707-CE913741B97A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{2DC2A7B6-0CE0-4078-89FF-018CE34F0211} = {03B24293-E542-4250-B682-705003026FAC}
 		{91A410E0-924A-4F94-8120-19EEABA25917} = {93EFEEAB-7D6D-45EF-B518-9C5E8F53DBA5}
 		{875DF3A0-6277-433D-9418-A99877B391E3} = {03B24293-E542-4250-B682-705003026FAC}
+		{70548357-C2C0-4B2B-A707-CE913741B97A} = {81838BFD-3EF0-4BF2-9996-44349F601E3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D27EAAE0-613E-438B-A9D4-EF77C7CAF18F}
