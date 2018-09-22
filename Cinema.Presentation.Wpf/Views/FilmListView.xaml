@@ -21,6 +21,7 @@
         <Button Grid.Row="2"
                 Width="80"
                 Content="Add film"
-                HorizontalAlignment="Right"></Button>
+                HorizontalAlignment="Right"
+                Command="{Binding AddFilmCommand}"/>
     </Grid>
 </UserControl>
