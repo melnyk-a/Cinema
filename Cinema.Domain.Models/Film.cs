@@ -1,6 +1,6 @@
 ﻿namespace Cinema.Domain.Models
 {
-    internal sealed class Film
+    public sealed class Film
     {
         private readonly string name;
 
