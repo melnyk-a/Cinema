@@ -8,5 +8,7 @@
         {
             this.title = title;
         }
+
+        public string Title => title;
     }
 }
