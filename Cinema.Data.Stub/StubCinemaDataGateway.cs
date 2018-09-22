@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Cinema.Domain.Models;
+﻿using Cinema.Domain.Models;
 using Cinema.Domain.Models.JobTitles;
+using System;
+using System.Collections.Generic;
 
 namespace Cinema.Data.Stub
 {
