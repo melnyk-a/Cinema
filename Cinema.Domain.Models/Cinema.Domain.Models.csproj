@@ -41,6 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Film.cs" />
+    <Compile Include="FilmCrew.cs" />
+    <Compile Include="Human.cs" />
+    <Compile Include="JobTitles\Actor.cs" />
+    <Compile Include="JobTitles\Director.cs" />
+    <Compile Include="JobTitles\JobTitle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
