@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
-    internal sealed class FilmListViewModel : ViewModel
+    public sealed class FilmListViewModel : ViewModel
     {
         private readonly ICollection<FilmViewModel> films = new ObservableCollection<FilmViewModel>();
 
