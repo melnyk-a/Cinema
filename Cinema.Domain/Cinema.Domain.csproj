@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CinemaManager.cs" />
     <Compile Include="ICinemaManager.cs" />
     <Compile Include="ICinemaProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
