@@ -47,7 +47,6 @@ namespace Cinema.Data.Stub
                    })
             ));
 
-
             return films;
         }
     }
