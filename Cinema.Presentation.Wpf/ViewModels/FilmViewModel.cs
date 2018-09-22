@@ -2,7 +2,7 @@
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
-    internal sealed class FilmViewModel
+    public sealed class FilmViewModel
     {
         private readonly Film film;
 
