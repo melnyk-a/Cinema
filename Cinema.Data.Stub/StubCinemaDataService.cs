@@ -1,6 +1,6 @@
 ﻿namespace Cinema.Data.Stub
 {
-    internal sealed class StubCinemaDataService : ICinemaDataService
+    public sealed class StubCinemaDataService : ICinemaDataService
     {
         public void CloseDataGateway(ICinemaDataGateway dataGateway)
         {
