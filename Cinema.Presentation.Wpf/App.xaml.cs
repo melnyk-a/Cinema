@@ -1,20 +1,36 @@
-﻿using Cinema.Data.Stub;
-using Cinema.Domain;
-using Cinema.Presentation.Wpf.ViewModels;
-using Cinema.Presentation.Wpf.Views;
+﻿using Cinema.Presentation.Wpf.Views;
+using StructureMap;
 using System.Windows;
 
 namespace Cinema.Presentation.Wpf
 {
     internal partial class App : Application
     {
+        private Container CreateContainer()
+        {
+            var container = new Container(
+                configurator =>
+                {
+                    configurator.Scan(
+                        scanner =>
+                        {
+                            scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
+                            scanner.SingleImplementationsOfInterface();
+                            scanner.WithDefaultConventions();
+                        });
+                }
+            );
+
+            return container;
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            var viewModel = new MainWindowViewModel(new CinemaManager(new StubCinemaDataService()));
-            var view = new MainWindowView(viewModel);
-            view.Show();
+            Container container = CreateContainer();
+            MainWindowView mainView = container.GetInstance<MainWindowView>();
+            mainView.Show();
         }
     }
 }
