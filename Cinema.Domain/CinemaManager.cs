@@ -13,6 +13,15 @@ namespace Cinema.Domain
             this.dataService = dataService;
         }
 
+        public void AddFilm(Film film)
+        {
+            ICinemaDataGateway dataGateway = dataService.OpenDataGateway();
+
+            dataGateway.AddFilm(film);
+
+            dataService.CloseDataGateway(dataGateway);
+        }
+
         public IEnumerable<Film> GetAllFilms()
         {
             ICinemaDataGateway dataGateway = dataService.OpenDataGateway();
