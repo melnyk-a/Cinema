@@ -140,6 +140,10 @@
       <Project>{2dc2a7b6-0ce0-4078-89ff-018ce34f0211}</Project>
       <Name>Cinema.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cinema.Utilities.Wpf\Cinema.Utilities.Wpf.csproj">
+      <Project>{c9b3bbd3-fd42-4731-9ff5-98762f06492c}</Project>
+      <Name>Cinema.Utilities.Wpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

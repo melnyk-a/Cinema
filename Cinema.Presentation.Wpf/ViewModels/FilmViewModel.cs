@@ -1,8 +1,9 @@
 ﻿using Cinema.Domain.Models;
+using Cinema.Utilities.Wpf.ViewModels;
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
-    public sealed class FilmViewModel
+    public sealed class FilmViewModel : ViewModel
     {
         private readonly Film film;
 

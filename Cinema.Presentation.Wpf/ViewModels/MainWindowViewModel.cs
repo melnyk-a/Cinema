@@ -1,6 +1,8 @@
-﻿namespace Cinema.Presentation.Wpf.ViewModels
+﻿using Cinema.Utilities.Wpf.ViewModels;
+
+namespace Cinema.Presentation.Wpf.ViewModels
 {
-    internal sealed class MainWindowViewModel
+    internal sealed class MainWindowViewModel : ViewModel
     {
         private readonly FilmListViewModel listViewModel;
         private readonly AddFilmViewModel addFilmViewModel;

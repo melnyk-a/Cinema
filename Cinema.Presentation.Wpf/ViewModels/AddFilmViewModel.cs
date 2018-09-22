@@ -1,6 +1,8 @@
-﻿namespace Cinema.Presentation.Wpf.ViewModels
+﻿using Cinema.Utilities.Wpf.ViewModels;
+
+namespace Cinema.Presentation.Wpf.ViewModels
 {
-    internal sealed class AddFilmViewModel
+    internal sealed class AddFilmViewModel : ViewModel
     {
 
     }
