@@ -7,7 +7,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
 {
     internal sealed class MainWindowViewModel : ViewModel
     {
-        private readonly ICommand addFilmCommand;
         private readonly ViewModel addFilmViewModel;
         private readonly ViewModel filmListViewModel;
 
@@ -18,7 +17,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
             addFilmViewModel = viewModelFactory.CreateAddFilmViewModel();
             filmListViewModel = viewModelFactory.CreateFilmListViewModel();
 
-            addFilmCommand = new DelegateCommand(() => Current = addFilmCommand);
             current = filmListViewModel;
         }
 
@@ -27,7 +25,5 @@ namespace Cinema.Presentation.Wpf.ViewModels
             get => current;
             private set => SetProperty(ref current, value);
         }
-
-        public ICommand AddFilmCommand => addFilmCommand;
     }
 }
