@@ -41,6 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StubCinemaDataGateway.cs" />
+    <Compile Include="StubCinemaDataService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">
+      <Project>{5bd46295-1197-415b-b456-b097fff1d680}</Project>
+      <Name>Cinema.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Domain.Models\Cinema.Domain.Models.csproj">
+      <Project>{875df3a0-6277-433d-9418-a99877b391e3}</Project>
+      <Name>Cinema.Domain.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
