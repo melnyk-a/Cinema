@@ -1,15 +1,15 @@
-﻿using System.Windows;
+﻿using Cinema.Presentation.Wpf.ViewModels;
+using System.Windows;
 
 namespace Cinema.Presentation.Wpf.Views
 {
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
-    internal partial class MainView : Window
+    internal partial class MainWindowView : Window
     {
-        public MainView()
+        public MainWindowView(MainWindowViewModel viewModel)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
         }
     }
 }

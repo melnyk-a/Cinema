@@ -58,6 +58,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\FilmViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
@@ -95,7 +97,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\Cinema.Data.Stub\Cinema.Data.Stub.csproj">
+      <Project>{70548357-c2c0-4b2b-a707-ce913741b97a}</Project>
+      <Name>Cinema.Data.Stub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">
+      <Project>{5bd46295-1197-415b-b456-b097fff1d680}</Project>
+      <Name>Cinema.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Domain.Models\Cinema.Domain.Models.csproj">
+      <Project>{875df3a0-6277-433d-9418-a99877b391e3}</Project>
+      <Name>Cinema.Domain.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Domain\Cinema.Domain.csproj">
+      <Project>{2dc2a7b6-0ce0-4078-89ff-018ce34f0211}</Project>
+      <Name>Cinema.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
