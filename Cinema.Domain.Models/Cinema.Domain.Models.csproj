@@ -46,6 +46,7 @@
     <Compile Include="JobTitles\Actor.cs" />
     <Compile Include="JobTitles\Director.cs" />
     <Compile Include="JobTitles\JobTitle.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
