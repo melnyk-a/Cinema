@@ -5,23 +5,22 @@
              Height="{Binding Path=Heigh, RelativeSource={RelativeSource AncestorType=UserControl}}" 
              Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl}}">
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" ItemsSource="{Binding Films}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type ViewModels:FilmViewModel}">
-                        <TextBlock Text="{Binding Title}"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <StackPanel Grid.Column="2">
-                <Button Content="Show all films"  Margin="5"></Button>
-                <Button Content="Add film" Margin="5"></Button>
-            </StackPanel>
-        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" 
+                 ItemsSource="{Binding Films}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:FilmViewModel}">
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="2"
+                Width="80"
+                Content="Add film"
+                HorizontalAlignment="Right"></Button>
     </Grid>
 </UserControl>
