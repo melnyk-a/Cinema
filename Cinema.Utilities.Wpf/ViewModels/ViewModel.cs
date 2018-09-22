@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Cinema.Utilities.Wpf.ViewModels
 {
-    internal abstract class ViewModel
+    public abstract class ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
