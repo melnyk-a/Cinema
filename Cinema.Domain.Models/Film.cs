@@ -2,11 +2,11 @@
 {
     public sealed class Film
     {
-        private readonly string name;
+        private readonly string title;
 
-        public Film(string name)
+        public Film(string title)
         {
-            this.name = name;
+            this.title = title;
         }
     }
 }
