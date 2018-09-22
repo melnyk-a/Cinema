@@ -1,5 +1,8 @@
-﻿using Cinema.Presentation.Wpf.Views;
+﻿using Cinema.Presentation.Wpf.ViewModels;
+using Cinema.Presentation.Wpf.ViewModels.Factories;
+using Cinema.Presentation.Wpf.Views;
 using StructureMap;
+using StructureMap.AutoFactory;
 using System.Windows;
 
 namespace Cinema.Presentation.Wpf
@@ -18,6 +21,8 @@ namespace Cinema.Presentation.Wpf
                             scanner.SingleImplementationsOfInterface();
                             scanner.WithDefaultConventions();
                         });
+                    configurator.For<IViewModelFactory>().CreateFactory();
+                    configurator.For<FilmViewModel>().Use<FilmViewModel>();
                 }
             );
 
