@@ -2,7 +2,7 @@
 
 namespace Cinema.Utilities.Wpf.Commands
 {
-    internal sealed class DelegateCommand : Command
+    public sealed class DelegateCommand : Command
     {
         private readonly Func<bool> canExecuteMethod;
         private readonly Action executeMethod;
