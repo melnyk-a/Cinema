@@ -4,7 +4,7 @@ using Cinema.Domain.Models;
 
 namespace Cinema.Domain
 {
-    internal sealed class CinemaManager : ICinemaManager, ICinemaProvider
+    public sealed class CinemaManager : ICinemaManager, ICinemaProvider
     {
         private readonly ICinemaDataService dataService;
 
