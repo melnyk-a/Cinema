@@ -5,6 +5,7 @@ namespace Cinema.Data
 {
     public interface ICinemaDataGateway
     {
+        void AddFilm();
         IEnumerable<Film> GetAllFilms();
     }
 }
