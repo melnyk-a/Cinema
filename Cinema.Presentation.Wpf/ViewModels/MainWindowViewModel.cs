@@ -10,7 +10,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICommand addFilmCommand;
         private readonly ViewModel addFilmViewModel;
         private readonly ViewModel filmListViewModel;
-        private readonly ICommand showAllFilmsCommand;
 
         private object current;
 
@@ -20,7 +19,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
             filmListViewModel = viewModelFactory.CreateFilmListViewModel();
 
             addFilmCommand = new DelegateCommand(() => Current = addFilmCommand);
-            showAllFilmsCommand = new DelegateCommand(() => Current = showAllFilmsCommand);
             current = filmListViewModel;
         }
 
@@ -31,6 +29,5 @@ namespace Cinema.Presentation.Wpf.ViewModels
         }
 
         public ICommand AddFilmCommand => addFilmCommand;
-        public ICommand ShowAllFilmsCommand => showAllFilmsCommand;
     }
 }
