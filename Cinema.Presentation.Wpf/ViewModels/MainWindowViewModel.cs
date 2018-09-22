@@ -1,7 +1,5 @@
 ﻿using Cinema.Presentation.Wpf.ViewModels.Factories;
-using Cinema.Utilities.Wpf.Commands;
 using Cinema.Utilities.Wpf.ViewModels;
-using System.Windows.Input;
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
