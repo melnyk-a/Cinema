@@ -46,5 +46,10 @@ namespace Cinema.Presentation.Wpf
         {
             CurrentViewModel = addFilmViewModel;
         }
+
+        public void SetFilmListViewModel()
+        {
+            CurrentViewModel = filmListViewModel;
+        }
     }
 }
