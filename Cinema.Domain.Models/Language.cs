@@ -2,6 +2,7 @@
 {
     public enum Language
     {
+        Unspecified,
         Arabic,
         English,
         German,
