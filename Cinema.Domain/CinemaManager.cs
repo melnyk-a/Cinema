@@ -7,9 +7,9 @@ namespace Cinema.Domain
 {
     public sealed class FilmManager : IFilmProvider, IFilmManager
     {
-        private readonly ICinemaDataService dataService;
+        private readonly IFilmDataService dataService;
 
-        public FilmManager(ICinemaDataService dataService)
+        public FilmManager(IFilmDataService dataService)
         {
             this.dataService = dataService;
         }
@@ -18,7 +18,7 @@ namespace Cinema.Domain
 
         public void AddFilm(Film film)
         {
-            ICinemaDataGateway dataGateway = dataService.OpenDataGateway();
+            IFilmDataGateway dataGateway = dataService.OpenDataGateway();
 
             dataGateway.AddFilm(film);
             OnFilmAdded(new FilmEventArgs(film));
@@ -28,7 +28,7 @@ namespace Cinema.Domain
 
         public IEnumerable<Film> GetAllFilms()
         {
-            ICinemaDataGateway dataGateway = dataService.OpenDataGateway();
+            IFilmDataGateway dataGateway = dataService.OpenDataGateway();
 
             IEnumerable<Film> films = dataGateway.GetAllFilms();
 
