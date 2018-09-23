@@ -19,7 +19,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
             foreach (Film film in cinemaProvider.GetAllFilms())
             {
                 var viewModel = viewModelFactory.CreateFilmViewModel(film);
-                films.Add(viewModel); films.Add(viewModel);
+                films.Add(viewModel);
             }
         }
 
