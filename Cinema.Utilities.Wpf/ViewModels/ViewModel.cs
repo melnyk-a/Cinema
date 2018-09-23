@@ -11,10 +11,13 @@ namespace Cinema.Utilities.Wpf.ViewModels
 {
     public abstract class ViewModel : INotifyPropertyChanged
     {
+        private readonly Type currentType;
+        private readonly PropertyInfo[] properties;
+
         public ViewModel()
         {
-            Type currentType = GetType();
-            PropertyInfo[] properties = currentType.GetProperties();
+            currentType = GetType();
+            properties = currentType.GetProperties();
             foreach (PropertyInfo property in properties)
             {
                 HandlePropertiesAttributes(property);
@@ -27,8 +30,6 @@ namespace Cinema.Utilities.Wpf.ViewModels
         {
             ICollection<PropertyInfo> result = new List<PropertyInfo>();
 
-            Type currentType = GetType();
-            PropertyInfo[] properties = currentType.GetProperties();
             foreach (PropertyInfo property in properties)
             {
                 if (property.GetValue(this) is INotifyCollectionChanged)
@@ -39,6 +40,7 @@ namespace Cinema.Utilities.Wpf.ViewModels
 
             return result;
         }
+
         private void HandleDependsUpponCollectionAttribute(PropertyInfo appliedProperty)
         {
             IEnumerable<DependsUponCollectionAttribute> attributes = appliedProperty.GetCustomAttributes<DependsUponCollectionAttribute>();
@@ -55,13 +57,6 @@ namespace Cinema.Utilities.Wpf.ViewModels
                            };
                     }
                 }
-                //PropertyChanged += (sender, e) =>
-                //{
-                //    if (e.PropertyName == attribute.PropertyName)
-                //    {
-                //        OnPropertyChanged(new PropertyChangedEventArgs(appliedProperty.Name));
-                //    }
-                //};
             }
         }
 
