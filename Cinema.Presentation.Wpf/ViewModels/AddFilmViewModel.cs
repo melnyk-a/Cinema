@@ -2,7 +2,7 @@
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
-    public sealed class AddFilmViewModel : ViewModel
+    public sealed class AddFilmViewModel : SwitchContentViewModel
     {
 
     }
