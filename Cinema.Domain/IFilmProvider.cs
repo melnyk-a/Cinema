@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Cinema.Domain
 {
-    public interface ICinemaProvider
+    public interface IFilmProvider
     {
         event EventHandler<FilmEventArgs> FilmAdded;
         IEnumerable<Film> GetAllFilms();

@@ -2,7 +2,7 @@
 
 namespace Cinema.Domain
 {
-    public interface ICinemaManager
+    public interface IFilmManager
     {
         void AddFilm(Film film);
     }

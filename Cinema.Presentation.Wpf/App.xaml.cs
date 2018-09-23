@@ -29,9 +29,9 @@ namespace Cinema.Presentation.Wpf
                     configurator.For<FilmListViewModel>().Use<FilmListViewModel>();
                     configurator.For<FilmViewModel>().Use<FilmViewModel>();
                     configurator.For<ViewModelManager>().Use<ViewModelManager>().Singleton();
-                    configurator.ForConcreteType<CinemaManager>().Configure.Singleton();
-                    configurator.For<ICinemaProvider>().Use(config => config.GetInstance<CinemaManager>());
-                    configurator.For<ICinemaManager>().Use(config => config.GetInstance<CinemaManager>());
+                    configurator.ForConcreteType<FilmManager>().Configure.Singleton();
+                    configurator.For<IFilmProvider>().Use(config => config.GetInstance<FilmManager>());
+                    configurator.For<IFilmManager>().Use(config => config.GetInstance<FilmManager>());
                 }
             );
 

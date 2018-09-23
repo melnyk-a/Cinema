@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Cinema.Data;
+﻿using Cinema.Data;
 using Cinema.Domain.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Cinema.Domain
 {
-    public sealed class CinemaManager : ICinemaProvider, ICinemaManager
+    public sealed class FilmManager : IFilmProvider, IFilmManager
     {
         private readonly ICinemaDataService dataService;
 
-        public CinemaManager(ICinemaDataService dataService)
+        public FilmManager(ICinemaDataService dataService)
         {
             this.dataService = dataService;
         }

@@ -14,7 +14,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICollection<FilmViewModel> films = new ObservableCollection<FilmViewModel>();
         private readonly IViewModelFactory viewModelFactory;
 
-        public FilmListViewModel(ICinemaProvider cinemaProvider, IViewModelFactory viewModelFactory)
+        public FilmListViewModel(IFilmProvider cinemaProvider, IViewModelFactory viewModelFactory)
         {
             this.viewModelFactory = viewModelFactory;
             addFilmCommand = new DelegateCommand(() => ViewModelManager.SetAddFilmViewModel());

@@ -14,13 +14,13 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly AddFilmCrewViewModel addFilmCrewViewModel;
         private readonly ICommand addFilmCommand;
         private readonly ICommand cancelCommand;
-        private readonly ICinemaManager cinemaManager;
+        private readonly IFilmManager cinemaManager;
 
         private Language selectedLanguage;
         private DateTime selectedDate;
         private string title;
 
-        public AddFilmViewModel(ICinemaManager cinemaManager, IViewModelFactory viewModelFactory)
+        public AddFilmViewModel(IFilmManager cinemaManager, IViewModelFactory viewModelFactory)
         {
             this.cinemaManager = cinemaManager;
             addFilmCommand = new DelegateCommand(AddFilm, () => CanAddFilm);
