@@ -25,19 +25,22 @@
                        Grid.Row="0"
                        Text="Title:"/>
             <TextBox Grid.Column="2" 
-                     Grid.Row="0"/>
+                     Grid.Row="0"
+                     Text="{Binding Title}"/>
             <TextBlock Grid.Column="0" 
                        Grid.Row="2"
                        Text="Release date:"/>
             <DatePicker Grid.Column="2" 
                         Grid.Row="2"
-                        DisplayDateEnd="{Binding Source={x:Static sys:DateTime.Now}, Mode=OneWay}"/>
+                        DisplayDateEnd="{Binding Source={x:Static sys:DateTime.Now}, Mode=OneWay}"
+                        SelectedDate="{Binding SelectedDate}"/>
             <TextBlock Grid.Column="0" 
                        Grid.Row="4"
                        Text="Language:"/>
             <ComboBox Grid.Column="2" 
                       Grid.Row="4"
-                      ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
+                      ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                      SelectedItem="{Binding SelectedLanguage}"/>
         </Grid>
         <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Right"
@@ -50,6 +53,6 @@
                     Command="{Binding}"
                     Content="Cancel"/>
         </StackPanel>
-        <Controls:AddFilmCrewUserControl/>
+        <Controls:AddFilmCrewUserControl DataContext="{Binding AddFilmCrewViewModel}"/>
     </DockPanel>
 </UserControl>
