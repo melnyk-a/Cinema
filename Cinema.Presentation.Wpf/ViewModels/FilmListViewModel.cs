@@ -12,15 +12,23 @@ namespace Cinema.Presentation.Wpf.ViewModels
     {
         private ICommand addFilmCommand;
         private readonly ICollection<FilmViewModel> films = new ObservableCollection<FilmViewModel>();
+        private readonly IViewModelFactory viewModelFactory;
 
         public FilmListViewModel(ICinemaProvider cinemaProvider, IViewModelFactory viewModelFactory)
         {
+            this.viewModelFactory = viewModelFactory;
             addFilmCommand = new DelegateCommand(() => ViewModelManager.SetAddFilmViewModel());
             foreach (Film film in cinemaProvider.GetAllFilms())
             {
                 var viewModel = viewModelFactory.CreateFilmViewModel(film);
                 films.Add(viewModel);
             }
+
+            cinemaProvider.FilmAdded += (sender, e) =>
+             {
+                 var viewModel = viewModelFactory.CreateFilmViewModel(e.AddedFilm);
+                 films.Add(viewModel);
+             };
         }
         public IEnumerable<FilmViewModel> Films => films;
 
