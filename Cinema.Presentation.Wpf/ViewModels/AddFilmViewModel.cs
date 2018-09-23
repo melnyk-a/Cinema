@@ -68,6 +68,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
         public void AddFilm()
         {
             ResetValues();
+
+            ViewModelManager.SetFilmListViewModel();
         }
 
         public void ResetValues()
