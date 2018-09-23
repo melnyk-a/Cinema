@@ -47,10 +47,11 @@
                     DockPanel.Dock="Bottom">
             <Button Width="80" 
                     Margin="5"
-                    Content="Add film"/>
+                    Content="Add film"
+                    Command="{Binding AddFilmCommand}"/>
             <Button Width="80" 
                     Margin="5"
-                    Command="{Binding}"
+                    Command="{Binding CancelCommand}"
                     Content="Cancel"/>
         </StackPanel>
         <Controls:AddFilmCrewUserControl DataContext="{Binding AddFilmCrewViewModel}"/>
