@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\AddFilmCrewViewModel.cs" />
     <Compile Include="ViewModels\AddFilmViewModel.cs" />
     <Compile Include="ViewModels\Factories\IViewModelFactory.cs" />
+    <Compile Include="ViewModels\FilmCrewViewModel.cs" />
     <Compile Include="ViewModels\FilmListViewModel.cs" />
     <Compile Include="ViewModels\FilmViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
