@@ -1,21 +1,18 @@
-﻿using Cinema.Presentation.Wpf.ViewModels.Factories;
-using Cinema.Utilities.Wpf.ViewModels;
+﻿using Cinema.Utilities.Wpf.ViewModels;
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
     internal sealed class MainWindowViewModel : ViewModel
     {
-        private readonly ViewModel addFilmViewModel;
-        private readonly ViewModel filmListViewModel;
-
         private object current;
 
-        public MainWindowViewModel(IViewModelFactory viewModelFactory)
+        public MainWindowViewModel(ViewModelManager viewModelManager)
         {
-            addFilmViewModel = viewModelFactory.CreateAddFilmViewModel();
-            filmListViewModel = viewModelFactory.CreateFilmListViewModel();
-
-            current = filmListViewModel;
+            viewModelManager.CurrentViewModelChanged += (sender, e) =>
+            {
+                Current = viewModelManager.CurrentViewModel;
+            };
+            current = viewModelManager.CurrentViewModel;
         }
 
         public object Current
