@@ -9,7 +9,7 @@
             <Views:FilmListView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type ViewModels:AddFilmViewModel}">
-            <Views:AddFilm/>
+            <Views:AddFilmView/>
         </DataTemplate>
     </Application.Resources>
 </Application>

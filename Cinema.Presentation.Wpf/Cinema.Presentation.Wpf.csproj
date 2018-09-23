@@ -74,8 +74,8 @@
     <Compile Include="ViewModels\FilmViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SwitchContentViewModel.cs" />
-    <Compile Include="Views\AddFilm.xaml.cs">
-      <DependentUpon>AddFilm.xaml</DependentUpon>
+    <Compile Include="Views\AddFilmView.xaml.cs">
+      <DependentUpon>AddFilmView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FilmListView.xaml.cs">
       <DependentUpon>FilmListView.xaml</DependentUpon>
@@ -112,7 +112,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AddFilm.xaml">
+    <Page Include="Views\AddFilmView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
