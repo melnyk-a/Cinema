@@ -1,4 +1,5 @@
-﻿<UserControl xmlns:Controls="clr-namespace:Cinema.Presentation.Wpf.Controls"  x:Class="Cinema.Presentation.Wpf.Views.AddFilmView"
+﻿<UserControl xmlns:Controls="clr-namespace:Cinema.Presentation.Wpf.Controls" 
+             x:Class="Cinema.Presentation.Wpf.Views.AddFilmView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
