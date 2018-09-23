@@ -10,7 +10,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
 {
     public sealed class FilmListViewModel : SwitchContentViewModel
     {
-        private ICommand addFilmCommand;
+        private readonly ICommand addFilmCommand;
         private readonly ICollection<FilmViewModel> films = new ObservableCollection<FilmViewModel>();
         private readonly IViewModelFactory viewModelFactory;
 
@@ -32,9 +32,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
         }
         public IEnumerable<FilmViewModel> Films => films;
 
-        public ICommand AddFilmCommand
-        {
-            get => addFilmCommand;
-        }
+        public ICommand AddFilmCommand =>  addFilmCommand;
     }
 }

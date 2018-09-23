@@ -13,6 +13,9 @@ namespace Cinema.Presentation.Wpf.ViewModels
 {
     public sealed class AddFilmCrewViewModel : ViewModel
     {
+        private const string ActorTag = "Actor";
+        private const string DirectorTag = "Director";
+
         private readonly ICommand addActorCommand;
         private readonly ICommand addDirectorCommand;
         private readonly ICollection<FilmCrewViewModel> crews = new ObservableCollection<FilmCrewViewModel>();
@@ -27,26 +30,26 @@ namespace Cinema.Presentation.Wpf.ViewModels
         {
             this.viewModelFactory = viewModelFactory;
 
-            addActorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, "Actor")), () => CanAddActor);
-            addDirectorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, "Director")), () => CanAddDirector);
+            addActorCommand = new DelegateCommand(() =>
+                crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, ActorTag)),
+                () => CanAddActor
+            );
+            addDirectorCommand = new DelegateCommand(() =>
+                crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, DirectorTag)),
+                () => CanAddDirector
+            );
 
             PropertyChanged += (sender, e) =>
                  {
                      if (e.PropertyName == nameof(IsFilmCrewReadyForSetUp))
                      {
-                         if(IsFilmCrewReadyForSetUp)
+                         if (IsFilmCrewReadyForSetUp)
                          {
                              OnFilmCrewPrepared(EventArgs.Empty);
                          }
                      }
                  };
         }
-
-        [RaiseCanExecuteDependsUpon(nameof(CanAddActor))]
-        public ICommand AddActorCommand => addActorCommand;
-
-        [RaiseCanExecuteDependsUpon(nameof(CanAddDirector))]
-        public ICommand AddDirectorCommand => addDirectorCommand;
 
         public ICollection<Actor> Actors => FindAllActors();
 
@@ -62,6 +65,12 @@ namespace Cinema.Presentation.Wpf.ViewModels
             set => SetProperty(ref actorSurname, value);
         }
 
+        [RaiseCanExecuteDependsUpon(nameof(CanAddActor))]
+        public ICommand AddActorCommand => addActorCommand;
+
+        [RaiseCanExecuteDependsUpon(nameof(CanAddDirector))]
+        public ICommand AddDirectorCommand => addDirectorCommand;
+
         [DependsUponProperty(nameof(ActorName))]
         [DependsUponProperty(nameof(ActorSurname))]
         public bool CanAddActor => ActorName.Length > 0 && ActorSurname.Length > 0;
@@ -70,9 +79,9 @@ namespace Cinema.Presentation.Wpf.ViewModels
         [DependsUponProperty(nameof(DirectorSurname))]
         public bool CanAddDirector => DirectorName.Length > 0 && DirectorSurname.Length > 0;
 
-        public Director Director => FindDirector();
-
         public IEnumerable<FilmCrewViewModel> Crews => crews;
+
+        public Director Director => FindDirector();
 
         public string DirectorName
         {
@@ -86,8 +95,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
             set => SetProperty(ref directorSurname, value);
         }
 
-        public event EventHandler FilmCrewPrepared;
-
         [DependsUponCollection(nameof(Crews))]
         public bool IsFilmCrewReadyForSetUp
         {
@@ -99,13 +106,15 @@ namespace Cinema.Presentation.Wpf.ViewModels
             }
         }
 
+        public event EventHandler FilmCrewPrepared;
+
         private ICollection<Actor> FindAllActors()
         {
             ICollection<Actor> actors = new List<Actor>();
 
             foreach (FilmCrewViewModel filmCrew in crews)
             {
-                if (filmCrew.Position == "Actor")
+                if (filmCrew.Position == ActorTag)
                 {
                     actors.Add(new Actor(new Human(filmCrew.Name, filmCrew.Surname)));
                     break;
@@ -121,7 +130,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
             foreach (FilmCrewViewModel filmCrew in crews)
             {
-                if (filmCrew.Position == "Director")
+                if (filmCrew.Position == DirectorTag)
                 {
                     director = new Director(new Human(filmCrew.Name, filmCrew.Surname));
                     break;

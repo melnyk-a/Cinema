@@ -11,13 +11,13 @@ namespace Cinema.Presentation.Wpf.ViewModels
 {
     public sealed class AddFilmViewModel : SwitchContentViewModel
     {
-        private readonly AddFilmCrewViewModel addFilmCrewViewModel;
         private readonly ICommand addFilmCommand;
+        private readonly AddFilmCrewViewModel addFilmCrewViewModel;
         private readonly ICommand cancelCommand;
         private readonly IFilmManager cinemaManager;
 
-        private Language selectedLanguage;
         private DateTime selectedDate;
+        private Language selectedLanguage;
         private string title;
 
         public AddFilmViewModel(IFilmManager cinemaManager, IViewModelFactory viewModelFactory)
@@ -35,31 +35,37 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         [RaiseCanExecuteDependsUpon(nameof(CanAddFilm))]
         public ICommand AddFilmCommand => addFilmCommand;
+
         public object AddFilmCrewViewModel => addFilmCrewViewModel;
 
         [DependsUponProperty(nameof(Title))]
         [DependsUponProperty(nameof(SelectedDate))]
         [DependsUponProperty(nameof(SelectedLanguage))]
         [DependsUponProperty(nameof(FilmCrewPrepared))]
-        public bool CanAddFilm => Title.Length > 0 && SelectedDate != DateTime.MinValue && SelectedLanguage != Language.Unspecified && FilmCrewPrepared;
 
-        public ICommand CancelCommand
+        public bool CanAddFilm
         {
-            get => cancelCommand;
+            get
+            {
+                return Title.Length > 0 && SelectedDate != DateTime.MinValue && 
+                    SelectedLanguage != Language.Unspecified && FilmCrewPrepared;
+            }
         }
+
+        public ICommand CancelCommand => cancelCommand;
 
         public bool FilmCrewPrepared => addFilmCrewViewModel.IsFilmCrewReadyForSetUp;
-
-        public Language SelectedLanguage
-        {
-            get => selectedLanguage;
-            set => SetProperty(ref selectedLanguage, value);
-        }
 
         public DateTime SelectedDate
         {
             get => selectedDate;
             set => SetProperty(ref selectedDate, value);
+        }
+
+        public Language SelectedLanguage
+        {
+            get => selectedLanguage;
+            set => SetProperty(ref selectedLanguage, value);
         }
 
         public string Title
@@ -70,7 +76,12 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         public void AddFilm()
         {
-            cinemaManager.AddFilm(new Film(Title, SelectedDate, SelectedLanguage, new FilmCrew(addFilmCrewViewModel.Director, addFilmCrewViewModel.Actors)));
+            cinemaManager.AddFilm(new Film(Title, 
+                SelectedDate, 
+                SelectedLanguage, 
+                new FilmCrew(addFilmCrewViewModel.Director, 
+                    addFilmCrewViewModel.Actors))
+            );
             ResetValues();
             ViewModelManager.SetFilmListViewModel();
         }
