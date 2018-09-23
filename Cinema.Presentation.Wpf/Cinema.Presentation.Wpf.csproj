@@ -71,6 +71,7 @@
       <DependentUpon>AddFilmCrewUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelManager.cs" />
+    <Compile Include="ViewModels\AddFilmCrewViewModel.cs" />
     <Compile Include="ViewModels\AddFilmViewModel.cs" />
     <Compile Include="ViewModels\Factories\IViewModelFactory.cs" />
     <Compile Include="ViewModels\FilmListViewModel.cs" />
