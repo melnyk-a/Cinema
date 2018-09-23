@@ -11,9 +11,9 @@ namespace Cinema.Utilities.Wpf.Commands
 
         public abstract void Execute();
 
-        protected virtual void OnCanExecuteChanged(EventArgs e)
+        public void RaiseCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, e);
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         bool ICommand.CanExecute(object parameter)
