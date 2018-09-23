@@ -2,6 +2,7 @@
 using Cinema.Utilities.Wpf.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -22,6 +23,48 @@ namespace Cinema.Utilities.Wpf.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private IEnumerable<PropertyInfo> FindNotiFyCollectionChangedImplementProperty()
+        {
+            ICollection<PropertyInfo> result = new List<PropertyInfo>();
+
+            Type currentType = GetType();
+            PropertyInfo[] properties = currentType.GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.GetValue(this) is INotifyCollectionChanged)
+                {
+                    result.Add(property);
+                }
+            }
+
+            return result;
+        }
+        private void HandleDependsUpponCollectionAttribute(PropertyInfo appliedProperty)
+        {
+            IEnumerable<DependsUponCollectionAttribute> attributes = appliedProperty.GetCustomAttributes<DependsUponCollectionAttribute>();
+            foreach (DependsUponCollectionAttribute attribute in attributes)
+            {
+                IEnumerable<PropertyInfo> notifyCollections = FindNotiFyCollectionChangedImplementProperty();
+                foreach (PropertyInfo notifyCollection in notifyCollections)
+                {
+                    if (notifyCollection.Name == attribute.CollectionName)
+                    {
+                        ((INotifyCollectionChanged)notifyCollection.GetValue(this)).CollectionChanged += (sender, e) =>
+                           {
+                               OnPropertyChanged(new PropertyChangedEventArgs(appliedProperty.Name));
+                           };
+                    }
+                }
+                //PropertyChanged += (sender, e) =>
+                //{
+                //    if (e.PropertyName == attribute.PropertyName)
+                //    {
+                //        OnPropertyChanged(new PropertyChangedEventArgs(appliedProperty.Name));
+                //    }
+                //};
+            }
+        }
+
         private void HandleDependsUpponProperties(PropertyInfo appliedProperty)
         {
             IEnumerable<DependsUponPropertyAttribute> attributes = appliedProperty.GetCustomAttributes<DependsUponPropertyAttribute>();
@@ -37,10 +80,11 @@ namespace Cinema.Utilities.Wpf.ViewModels
             }
         }
 
-        private  void HandlePropertiesAttributes(PropertyInfo appliedProperty)
+        private void HandlePropertiesAttributes(PropertyInfo appliedProperty)
         {
             HandleDependsUpponProperties(appliedProperty);
             HandleRaiseCanExecuteDependsUpponProperties(appliedProperty);
+            HandleDependsUpponCollectionAttribute(appliedProperty);
         }
 
         private void HandleRaiseCanExecuteDependsUpponProperties(PropertyInfo appliedProperty)
