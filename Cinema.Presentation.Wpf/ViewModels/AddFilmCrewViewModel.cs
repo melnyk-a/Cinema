@@ -1,4 +1,5 @@
 ﻿using Cinema.Presentation.Wpf.ViewModels.Factories;
+using Cinema.Utilities.Wpf.Attributes;
 using Cinema.Utilities.Wpf.Commands;
 using Cinema.Utilities.Wpf.ViewModels;
 using System.Collections.Generic;
@@ -14,21 +15,23 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICollection<FilmCrewViewModel> crews = new ObservableCollection<FilmCrewViewModel>();
         private readonly IViewModelFactory viewModelFactory;
 
-        private string actorName;
-        private string actorSurname;
-        private string directorName;
-        private string directorSurname;
+        private string actorName = string.Empty;
+        private string actorSurname = string.Empty;
+        private string directorName = string.Empty;
+        private string directorSurname = string.Empty;
 
         public AddFilmCrewViewModel(IViewModelFactory viewModelFactory)
         {
             this.viewModelFactory = viewModelFactory;
 
-            addActorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, "Actor")));
-            addDirectorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, "Director")));
+            addActorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, "Actor")), () => CanAddActor);
+            addDirectorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, "Director")), () => CanAddDirector);
         }
 
+        [RaiseCanExecuteDependsUpon(nameof(CanAddActor))]
         public ICommand AddActorCommand => addActorCommand;
 
+        [RaiseCanExecuteDependsUpon(nameof(CanAddDirector))]
         public ICommand AddDirectorCommand => addDirectorCommand;
 
         public string ActorName
@@ -42,6 +45,16 @@ namespace Cinema.Presentation.Wpf.ViewModels
             get => actorSurname;
             set => SetProperty(ref actorSurname, value);
         }
+
+        [DependsUpon(nameof(ActorName))]
+        [DependsUpon(nameof(ActorSurname))]
+        public bool CanAddActor => ActorName.Length > 0 && ActorSurname.Length > 0;
+
+        [DependsUpon(nameof(DirectorName))]
+        [DependsUpon(nameof(DirectorSurname))]
+        public bool CanAddDirector => DirectorName.Length > 0 && DirectorSurname.Length > 0;
+
+        public bool FilmCrewSetUp => true;
 
         public IEnumerable<FilmCrewViewModel> Crews => crews;
 
