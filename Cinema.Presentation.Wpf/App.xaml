@@ -3,7 +3,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Views="clr-namespace:Cinema.Presentation.Wpf.Views"
-             xmlns:ViewModels="clr-namespace:Cinema.Presentation.Wpf.ViewModels">
+             xmlns:ViewModels="clr-namespace:Cinema.Presentation.Wpf.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:enum="clr-namespace:Cinema.Domain.Models;assembly=Cinema.Domain.Models">
     <Application.Resources>
         <DataTemplate DataType="{x:Type ViewModels:FilmListViewModel}">
             <Views:FilmListView/>
@@ -11,5 +13,11 @@
         <DataTemplate DataType="{x:Type ViewModels:AddFilmViewModel}">
             <Views:AddFilmView/>
         </DataTemplate>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enum:Language"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Application.Resources>
 </Application>
