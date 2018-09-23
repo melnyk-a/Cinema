@@ -11,5 +11,8 @@
         <DataTemplate DataType="{x:Type ViewModels:AddFilmViewModel}">
             <Views:AddFilmView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:AddFilmViewModel}">
+            <Views:AddFilm/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

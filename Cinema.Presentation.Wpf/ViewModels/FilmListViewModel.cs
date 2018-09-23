@@ -22,7 +22,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
                 films.Add(viewModel);
             }
         }
-
         public IEnumerable<FilmViewModel> Films => films;
 
         public ICommand AddFilmCommand
