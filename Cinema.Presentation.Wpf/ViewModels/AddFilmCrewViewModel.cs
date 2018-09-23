@@ -2,6 +2,7 @@
 using Cinema.Utilities.Wpf.Attributes;
 using Cinema.Utilities.Wpf.Commands;
 using Cinema.Utilities.Wpf.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -26,6 +27,17 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
             addActorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, "Actor")), () => CanAddActor);
             addDirectorCommand = new DelegateCommand(() => crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, "Director")), () => CanAddDirector);
+
+            PropertyChanged += (sender, e) =>
+                 {
+                     if (e.PropertyName == nameof(IsFilmCrewReadyForSetUp))
+                     {
+                         if(IsFilmCrewReadyForSetUp)
+                         {
+                             OnFilmCrewPrepared(EventArgs.Empty);
+                         }
+                     }
+                 };
         }
 
         [RaiseCanExecuteDependsUpon(nameof(CanAddActor))]
@@ -54,7 +66,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
         [DependsUponProperty(nameof(DirectorSurname))]
         public bool CanAddDirector => DirectorName.Length > 0 && DirectorSurname.Length > 0;
 
-        public bool FilmCrewSetUp
+        [DependsUponCollection(nameof(Crews))]
+        public bool IsFilmCrewReadyForSetUp
         {
             get
             {
@@ -92,6 +105,13 @@ namespace Cinema.Presentation.Wpf.ViewModels
         {
             get => directorSurname;
             set => SetProperty(ref directorSurname, value);
+        }
+
+        public event EventHandler FilmCrewPrepared;
+
+        public void OnFilmCrewPrepared(EventArgs e)
+        {
+            FilmCrewPrepared?.Invoke(this, e);
         }
     }
 }

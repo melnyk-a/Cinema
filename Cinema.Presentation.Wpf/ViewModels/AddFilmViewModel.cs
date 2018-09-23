@@ -3,6 +3,7 @@ using Cinema.Presentation.Wpf.ViewModels.Factories;
 using Cinema.Utilities.Wpf.Attributes;
 using Cinema.Utilities.Wpf.Commands;
 using System;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Cinema.Presentation.Wpf.ViewModels
@@ -21,6 +22,10 @@ namespace Cinema.Presentation.Wpf.ViewModels
         {
             addFilmCommand = new DelegateCommand(AddFilm, () => CanAddFilm);
             addFilmCrewViewModel = viewModelFactory.CreateAddFilmCrewViewModel();
+            addFilmCrewViewModel.FilmCrewPrepared += (sender, e) =>
+             {
+                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(FilmCrewPrepared)));
+             };
             cancelCommand = new DelegateCommand(() => ViewModelManager.SetFilmListViewModel());
         }
 
@@ -28,15 +33,18 @@ namespace Cinema.Presentation.Wpf.ViewModels
         public ICommand AddFilmCommand => addFilmCommand;
         public object AddFilmCrewViewModel => addFilmCrewViewModel;
 
-        [DependsUponPropertyAttribute(nameof(Title))]
-        [DependsUponPropertyAttribute(nameof(SelectedDate))]
-        [DependsUponPropertyAttribute(nameof(SelectedLanguage))]
-        public bool CanAddFilm => Title.Length > 0 && SelectedDate != DateTime.MinValue && SelectedLanguage != Language.Unspecified && addFilmCrewViewModel.FilmCrewSetUp;
+        [DependsUponProperty(nameof(Title))]
+        [DependsUponProperty(nameof(SelectedDate))]
+        [DependsUponProperty(nameof(SelectedLanguage))]
+        [DependsUponProperty(nameof(FilmCrewPrepared))]
+        public bool CanAddFilm => Title.Length > 0 && SelectedDate != DateTime.MinValue && SelectedLanguage != Language.Unspecified && FilmCrewPrepared;
 
         public ICommand CancelCommand
         {
             get => cancelCommand;
         }
+
+        public bool FilmCrewPrepared => addFilmCrewViewModel.IsFilmCrewReadyForSetUp;
 
         public Language SelectedLanguage
         {
