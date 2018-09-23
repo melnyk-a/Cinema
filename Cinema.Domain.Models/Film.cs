@@ -18,6 +18,7 @@ namespace Cinema.Domain.Models
         }
 
         public FilmCrew FilmCrew => filmCrew;
+
         public Language Language => language;
 
         public DateTime ReleaseDate => releaseDate;
