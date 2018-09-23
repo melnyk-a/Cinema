@@ -64,12 +64,9 @@
                    Margin="5"
                    Text="Film crew"/>
         <DataGrid ColumnWidth="*" 
-                  Margin="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header ="Name"/>
-                <DataGridTextColumn Header ="Surname"/>
-                <DataGridTextColumn Header="Position"/>
-            </DataGrid.Columns>
+                  Margin="5"
+                  ItemsSource="{Binding Crews}" 
+                  AutoGenerateColumns="True">
         </DataGrid>
     </DockPanel>
 </UserControl>
