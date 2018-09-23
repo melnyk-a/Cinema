@@ -1,4 +1,5 @@
-﻿using Cinema.Presentation.Wpf.ViewModels;
+﻿using Cinema.Domain;
+using Cinema.Presentation.Wpf.ViewModels;
 using Cinema.Presentation.Wpf.ViewModels.Factories;
 using Cinema.Presentation.Wpf.Views;
 using StructureMap;
@@ -28,6 +29,7 @@ namespace Cinema.Presentation.Wpf
                     configurator.For<FilmListViewModel>().Use<FilmListViewModel>();
                     configurator.For<FilmViewModel>().Use<FilmViewModel>();
                     configurator.For<ViewModelManager>().Use<ViewModelManager>().Singleton();
+                    configurator.For<ICinemaManager>().Use<CinemaManager>().Singleton();
                 }
             );
 
