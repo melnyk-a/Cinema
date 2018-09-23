@@ -6,6 +6,7 @@ namespace Cinema.Presentation.Wpf.ViewModels.Factories
     {
         AddFilmCrewViewModel CreateAddFilmCrewViewModel();
         AddFilmViewModel CreateAddFilmViewModel();
+        FilmCrewViewModel CreateFilmCrewViewModel(string name, string surname, string position);
         FilmViewModel CreateFilmViewModel(Film film);
         FilmListViewModel CreateFilmListViewModel();
     }
