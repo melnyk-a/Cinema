@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Cinema.Data.Stub
 {
-    internal sealed class StubCinemaDataGateway : ICinemaDataGateway
+    internal sealed class StubFilmDataGateway : IFilmDataGateway
     {
         private readonly ICollection<Film> films = new List<Film>();
 

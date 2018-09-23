@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StubCinemaDataGateway.cs" />
-    <Compile Include="StubCinemaDataService.cs" />
+    <Compile Include="StubFilmDataGateway.cs" />
+    <Compile Include="StubFilmDataService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">

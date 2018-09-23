@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Cinema.Data
 {
-    public interface ICinemaDataGateway
+    public interface IFilmDataGateway
     {
         void AddFilm(Film film);
         IEnumerable<Film> GetAllFilms();

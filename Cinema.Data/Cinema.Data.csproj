@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICinemaDataGateway.cs" />
-    <Compile Include="ICinemaDataService.cs" />
+    <Compile Include="IFilmDataGateway.cs" />
+    <Compile Include="IFilmDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
