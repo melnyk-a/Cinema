@@ -8,7 +8,7 @@
         <DataTemplate DataType="{x:Type ViewModels:FilmListViewModel}">
             <Views:FilmListView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type ViewModels:FilmViewModel}">
+        <DataTemplate DataType="{x:Type ViewModels:AddFilmViewModel}">
             <Views:AddFilm/>
         </DataTemplate>
     </Application.Resources>
