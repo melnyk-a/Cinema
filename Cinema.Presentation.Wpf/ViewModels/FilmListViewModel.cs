@@ -18,10 +18,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
             addFilmCommand = new DelegateCommand(() => ViewModelManager.SetAddFilmViewModel());
             foreach (Film film in cinemaProvider.GetAllFilms())
             {
-                {
-                    var viewModel = viewModelFactory.CreateFilmViewModel(film);
-                    films.Add(viewModel); films.Add(viewModel);
-                }
+                var viewModel = viewModelFactory.CreateFilmViewModel(film);
+                films.Add(viewModel); films.Add(viewModel);
             }
         }
 
