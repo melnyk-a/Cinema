@@ -6,7 +6,7 @@ namespace Cinema.Data.XmlXDocument
     {
         public IFilmDataGateway OpenDataGateway()
         {
-            throw new NotImplementedException();
+            return new XmlXDocumentFilmDataGateway();
         }
     }
 }
