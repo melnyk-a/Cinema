@@ -18,23 +18,19 @@ namespace Cinema.Domain
 
         public void AddFilm(Film film)
         {
-            IFilmDataGateway dataGateway = dataService.OpenDataGateway();
-
-            dataGateway.AddFilm(film);
-            OnFilmAdded(new FilmEventArgs(film));
-
-            dataService.CloseDataGateway(dataGateway);
+            using (IFilmDataGateway dataGateway = dataService.OpenDataGateway())
+            {
+                dataGateway.AddFilm(film);
+                OnFilmAdded(new FilmEventArgs(film));
+            }
         }
 
         public IEnumerable<Film> GetAllFilms()
         {
-            IFilmDataGateway dataGateway = dataService.OpenDataGateway();
-
-            IEnumerable<Film> films = dataGateway.GetAllFilms();
-
-            dataService.CloseDataGateway(dataGateway);
-
-            return films;
+            using (IFilmDataGateway dataGateway = dataService.OpenDataGateway())
+            {
+                return dataGateway.GetAllFilms();
+            }
         }
 
         private void OnFilmAdded(FilmEventArgs e)
