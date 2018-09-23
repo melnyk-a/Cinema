@@ -2,7 +2,7 @@
 
 namespace Cinema.Presentation.Wpf.ViewModels
 {
-    internal sealed class AddFilmCrewViewModel : ViewModel
+    public sealed class AddFilmCrewViewModel : ViewModel
     {
 
     }
