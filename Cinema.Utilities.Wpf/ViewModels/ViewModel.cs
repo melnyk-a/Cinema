@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Cinema.Utilities.Wpf.ViewModels
 {
-    public abstract class ViewModel
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -14,7 +14,7 @@ namespace Cinema.Utilities.Wpf.ViewModels
 
         protected void SetProperty<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = null)
         {
-            if(!oldValue?.Equals(newValue)??newValue!=null)
+            if (!oldValue?.Equals(newValue) ?? newValue != null)
             {
                 oldValue = newValue;
 
