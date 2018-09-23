@@ -1,4 +1,6 @@
-﻿using Cinema.Presentation.Wpf.ViewModels.Factories;
+﻿using Cinema.Domain.Models;
+using Cinema.Domain.Models.JobTitles;
+using Cinema.Presentation.Wpf.ViewModels.Factories;
 using Cinema.Utilities.Wpf.Attributes;
 using Cinema.Utilities.Wpf.Commands;
 using Cinema.Utilities.Wpf.ViewModels;
@@ -46,6 +48,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
         [RaiseCanExecuteDependsUpon(nameof(CanAddDirector))]
         public ICommand AddDirectorCommand => addDirectorCommand;
 
+        public ICollection<Actor> Actors => FindAllActors();
+
         public string ActorName
         {
             get => actorName;
@@ -66,32 +70,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
         [DependsUponProperty(nameof(DirectorSurname))]
         public bool CanAddDirector => DirectorName.Length > 0 && DirectorSurname.Length > 0;
 
-        [DependsUponCollection(nameof(Crews))]
-        public bool IsFilmCrewReadyForSetUp
-        {
-            get
-            {
-                bool hasActor = false;
-                bool hasDirector = false;
-                foreach (FilmCrewViewModel filmCrew in crews)
-                {
-                    if (filmCrew.Position == "Director")
-                    {
-                        hasDirector = true;
-                    }
-                    if (filmCrew.Position == "Actor")
-                    {
-                        hasActor = true;
-                    }
-                    if (hasActor & hasDirector)
-                    {
-                        break;
-                    }
-                }
-
-                return hasActor & hasDirector;
-            }
-        }
+        public Director Director => FindDirector();
 
         public IEnumerable<FilmCrewViewModel> Crews => crews;
 
@@ -108,6 +87,49 @@ namespace Cinema.Presentation.Wpf.ViewModels
         }
 
         public event EventHandler FilmCrewPrepared;
+
+        [DependsUponCollection(nameof(Crews))]
+        public bool IsFilmCrewReadyForSetUp
+        {
+            get
+            {
+                bool hasActor = FindAllActors().Count != 0;
+                bool hasDirector = FindDirector() != null;
+                return hasActor & hasDirector;
+            }
+        }
+
+        private ICollection<Actor> FindAllActors()
+        {
+            ICollection<Actor> actors = new List<Actor>();
+
+            foreach (FilmCrewViewModel filmCrew in crews)
+            {
+                if (filmCrew.Position == "Actor")
+                {
+                    actors.Add(new Actor(new Human(filmCrew.Name, filmCrew.Surname)));
+                    break;
+                }
+            }
+
+            return actors;
+        }
+
+        private Director FindDirector()
+        {
+            Director director = null;
+
+            foreach (FilmCrewViewModel filmCrew in crews)
+            {
+                if (filmCrew.Position == "Director")
+                {
+                    director = new Director(new Human(filmCrew.Name, filmCrew.Surname));
+                    break;
+                }
+            }
+
+            return director;
+        }
 
         public void OnFilmCrewPrepared(EventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using Cinema.Domain.Models;
+﻿using Cinema.Domain;
+using Cinema.Domain.Models;
 using Cinema.Presentation.Wpf.ViewModels.Factories;
 using Cinema.Utilities.Wpf.Attributes;
 using Cinema.Utilities.Wpf.Commands;
@@ -13,13 +14,15 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly AddFilmCrewViewModel addFilmCrewViewModel;
         private readonly ICommand addFilmCommand;
         private readonly ICommand cancelCommand;
+        private readonly ICinemaManager cinemaManager;
 
         private Language selectedLanguage;
         private DateTime selectedDate;
         private string title;
 
-        public AddFilmViewModel(IViewModelFactory viewModelFactory)
+        public AddFilmViewModel(ICinemaManager cinemaManager, IViewModelFactory viewModelFactory)
         {
+            this.cinemaManager = cinemaManager;
             addFilmCommand = new DelegateCommand(AddFilm, () => CanAddFilm);
             addFilmCrewViewModel = viewModelFactory.CreateAddFilmCrewViewModel();
             addFilmCrewViewModel.FilmCrewPrepared += (sender, e) =>
@@ -67,8 +70,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         public void AddFilm()
         {
+            cinemaManager.AddFilm(new Film(Title, SelectedDate, SelectedLanguage, new FilmCrew(addFilmCrewViewModel.Director, addFilmCrewViewModel.Actors)));
             ResetValues();
-
             ViewModelManager.SetFilmListViewModel();
         }
 
