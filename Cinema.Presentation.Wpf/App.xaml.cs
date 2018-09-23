@@ -25,6 +25,7 @@ namespace Cinema.Presentation.Wpf
                     configurator.For<AddFilmViewModel>().Use<AddFilmViewModel>();
                     configurator.For<FilmListViewModel>().Use<FilmListViewModel>();
                     configurator.For<FilmViewModel>().Use<FilmViewModel>();
+                    configurator.For<ViewModelManager>().Use<ViewModelManager>().Singleton();
                 }
             );
 
