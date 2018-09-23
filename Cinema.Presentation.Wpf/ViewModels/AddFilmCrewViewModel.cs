@@ -54,7 +54,31 @@ namespace Cinema.Presentation.Wpf.ViewModels
         [DependsUponProperty(nameof(DirectorSurname))]
         public bool CanAddDirector => DirectorName.Length > 0 && DirectorSurname.Length > 0;
 
-        public bool FilmCrewSetUp => true;
+        public bool FilmCrewSetUp
+        {
+            get
+            {
+                bool hasActor = false;
+                bool hasDirector = false;
+                foreach (FilmCrewViewModel filmCrew in crews)
+                {
+                    if (filmCrew.Position == "Director")
+                    {
+                        hasDirector = true;
+                    }
+                    if (filmCrew.Position == "Actor")
+                    {
+                        hasActor = true;
+                    }
+                    if (hasActor & hasDirector)
+                    {
+                        break;
+                    }
+                }
+
+                return hasActor & hasDirector;
+            }
+        }
 
         public IEnumerable<FilmCrewViewModel> Crews => crews;
 
