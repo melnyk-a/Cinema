@@ -1,17 +1,22 @@
 ﻿using Cinema.Domain.Models;
 using Cinema.Domain.Models.JobTitles;
+using Cinemas;
 using System;
 using System.Collections.Generic;
 
 namespace Cinema.Data.Stub
 {
-    internal sealed class StubFilmDataGateway : IFilmDataGateway
+    internal sealed class StubFilmDataGateway : DisposableObject, IFilmDataGateway
     {
         private readonly ICollection<Film> films = new List<Film>();
 
         public void AddFilm(Film film)
         {
             films.Add(film);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            // Do nothing.
         }
 
         public IEnumerable<Film> GetAllFilms()
