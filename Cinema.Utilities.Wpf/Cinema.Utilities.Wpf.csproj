@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\DependsUponAttribute.cs" />
+    <Compile Include="Attributes\DependsUponPropertyAttribute.cs" />
     <Compile Include="Attributes\RaiseCanExecuteDependsUponAttribute.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />

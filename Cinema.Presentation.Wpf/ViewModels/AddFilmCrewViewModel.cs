@@ -46,12 +46,12 @@ namespace Cinema.Presentation.Wpf.ViewModels
             set => SetProperty(ref actorSurname, value);
         }
 
-        [DependsUpon(nameof(ActorName))]
-        [DependsUpon(nameof(ActorSurname))]
+        [DependsUponProperty(nameof(ActorName))]
+        [DependsUponProperty(nameof(ActorSurname))]
         public bool CanAddActor => ActorName.Length > 0 && ActorSurname.Length > 0;
 
-        [DependsUpon(nameof(DirectorName))]
-        [DependsUpon(nameof(DirectorSurname))]
+        [DependsUponProperty(nameof(DirectorName))]
+        [DependsUponProperty(nameof(DirectorSurname))]
         public bool CanAddDirector => DirectorName.Length > 0 && DirectorSurname.Length > 0;
 
         public bool FilmCrewSetUp => true;

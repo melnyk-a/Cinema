@@ -28,9 +28,9 @@ namespace Cinema.Presentation.Wpf.ViewModels
         public ICommand AddFilmCommand => addFilmCommand;
         public object AddFilmCrewViewModel => addFilmCrewViewModel;
 
-        [DependsUpon(nameof(Title))]
-        [DependsUpon(nameof(SelectedDate))]
-        [DependsUpon(nameof(SelectedLanguage))]
+        [DependsUponPropertyAttribute(nameof(Title))]
+        [DependsUponPropertyAttribute(nameof(SelectedDate))]
+        [DependsUponPropertyAttribute(nameof(SelectedLanguage))]
         public bool CanAddFilm => Title.Length > 0 && SelectedDate != DateTime.MinValue && SelectedLanguage != Language.Unspecified && addFilmCrewViewModel.FilmCrewSetUp;
 
         public ICommand CancelCommand

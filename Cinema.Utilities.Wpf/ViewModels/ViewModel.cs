@@ -24,8 +24,8 @@ namespace Cinema.Utilities.Wpf.ViewModels
 
         private void HandleDependsUpponProperties(PropertyInfo appliedProperty)
         {
-            IEnumerable<DependsUponAttribute> attributes = appliedProperty.GetCustomAttributes<DependsUponAttribute>();
-            foreach (DependsUponAttribute attribute in attributes)
+            IEnumerable<DependsUponPropertyAttribute> attributes = appliedProperty.GetCustomAttributes<DependsUponPropertyAttribute>();
+            foreach (DependsUponPropertyAttribute attribute in attributes)
             {
                 PropertyChanged += (sender, e) =>
                 {
