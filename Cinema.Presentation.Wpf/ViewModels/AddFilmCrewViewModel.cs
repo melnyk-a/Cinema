@@ -113,5 +113,14 @@ namespace Cinema.Presentation.Wpf.ViewModels
         {
             FilmCrewPrepared?.Invoke(this, e);
         }
+
+        public void ResetValues()
+        {
+            ActorName = string.Empty;
+            ActorSurname = string.Empty;
+            DirectorName = string.Empty;
+            DirectorSurname = string.Empty;
+            crews.Clear();
+        }
     }
 }

@@ -14,9 +14,9 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICommand addFilmCommand;
         private readonly ICommand cancelCommand;
 
-        private Language selectedLanguage = Language.Unspecified;
-        private DateTime selectedDate = DateTime.MinValue;
-        private string title = string.Empty;
+        private Language selectedLanguage;
+        private DateTime selectedDate;
+        private string title;
 
         public AddFilmViewModel(IViewModelFactory viewModelFactory)
         {
@@ -27,6 +27,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
                  OnPropertyChanged(new PropertyChangedEventArgs(nameof(FilmCrewPrepared)));
              };
             cancelCommand = new DelegateCommand(() => ViewModelManager.SetFilmListViewModel());
+            ResetValues();
         }
 
         [RaiseCanExecuteDependsUpon(nameof(CanAddFilm))]
@@ -66,7 +67,15 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         public void AddFilm()
         {
+            ResetValues();
+        }
 
+        public void ResetValues()
+        {
+            SelectedLanguage = Language.Unspecified;
+            SelectedDate = DateTime.MinValue;
+            Title = string.Empty;
+            addFilmCrewViewModel.ResetValues();
         }
     }
 }
