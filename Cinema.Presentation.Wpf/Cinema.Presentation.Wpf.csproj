@@ -67,11 +67,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModelManager.cs" />
     <Compile Include="ViewModels\AddFilmViewModel.cs" />
     <Compile Include="ViewModels\Factories\IViewModelFactory.cs" />
     <Compile Include="ViewModels\FilmListViewModel.cs" />
     <Compile Include="ViewModels\FilmViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\SwitchContentViewModel.cs" />
     <Compile Include="Views\AddFilm.xaml.cs">
       <DependentUpon>AddFilm.xaml</DependentUpon>
     </Compile>
