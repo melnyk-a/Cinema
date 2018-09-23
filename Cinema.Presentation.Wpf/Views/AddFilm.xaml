@@ -40,7 +40,8 @@
             <Button Width="80" 
                     Margin="5">Add film</Button>
             <Button Width="80" 
-                    Margin="5">Cancel</Button>
+                    Margin="5"
+                    Command="{Binding CancelCommand}">Cancel</Button>
         </StackPanel>
     </Grid>
 </UserControl>
