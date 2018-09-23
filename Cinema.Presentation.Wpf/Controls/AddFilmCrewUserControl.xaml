@@ -37,10 +37,10 @@
                        Text="Director:"/>
             <TextBox Grid.Row="2" 
                      Grid.Column="2"
-                     Text="{Binding DirectorName}"/>
+                     Text="{Binding DirectorName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="2" 
                      Grid.Column="4"
-                     Text="{Binding DirectorSurname}"/>
+                     Text="{Binding DirectorSurname, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="2"
                     Grid.Column="6"
                     Content="Add director"
@@ -50,10 +50,10 @@
                        Text="Actor:"/>
             <TextBox Grid.Row="4" 
                      Grid.Column="2"
-                     Text="{Binding ActorName}"/>
+                     Text="{Binding ActorName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="4" 
                      Grid.Column="4"
-                     Text="{Binding ActorSurname}"/>
+                     Text="{Binding ActorSurname, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="4" 
                     Grid.Column="6"
                     Content="Add actor"
