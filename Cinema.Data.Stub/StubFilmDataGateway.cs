@@ -45,7 +45,7 @@ namespace Cinema.Data.Stub
                        new Actor(new Human("Alexandria", "Ocasio-Cortez"))
                     })
              ));
-            films.Add(new Film("Life Itself ",
+            films.Add(new Film("Life Itself",
                DateTime.Parse("21 September 2018"),
                Language.Spanish,
                new FilmCrew(
