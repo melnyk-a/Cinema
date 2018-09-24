@@ -2,7 +2,7 @@
 
 namespace Cinema.Data.XmlXDocument
 {
-    internal sealed class XmlXDocumentFilmDataService : IFilmDataService
+    public sealed class XmlXDocumentFilmDataService : IFilmDataService
     {
         public IFilmDataGateway OpenDataGateway()
         {
