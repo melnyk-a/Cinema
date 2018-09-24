@@ -14,17 +14,17 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICollection<FilmViewModel> films = new ObservableCollection<FilmViewModel>();
         private readonly IViewModelFactory viewModelFactory;
 
-        public FilmListViewModel(IFilmProvider cinemaProvider, IViewModelFactory viewModelFactory)
+        public FilmListViewModel(IFilmProvider filmProvider, IViewModelFactory viewModelFactory)
         {
             this.viewModelFactory = viewModelFactory;
             addFilmCommand = new DelegateCommand(() => ViewModelManager.SetAddFilmViewModel());
-            foreach (Film film in cinemaProvider.GetAllFilms())
+            foreach (Film film in filmProvider.GetAllFilms())
             {
                 var viewModel = viewModelFactory.CreateFilmViewModel(film);
                 films.Add(viewModel);
             }
 
-            cinemaProvider.FilmAdded += (sender, e) =>
+            filmProvider.FilmAdded += (sender, e) =>
              {
                  var viewModel = viewModelFactory.CreateFilmViewModel(e.AddedFilm);
                  films.Add(viewModel);

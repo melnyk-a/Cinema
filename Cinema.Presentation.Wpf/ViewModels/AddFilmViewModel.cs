@@ -14,15 +14,15 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICommand addFilmCommand;
         private readonly AddFilmCrewViewModel addFilmCrewViewModel;
         private readonly ICommand cancelCommand;
-        private readonly IFilmManager cinemaManager;
+        private readonly IFilmManager filmManager;
 
         private DateTime selectedDate;
         private Language selectedLanguage;
         private string title;
 
-        public AddFilmViewModel(IFilmManager cinemaManager, IViewModelFactory viewModelFactory)
+        public AddFilmViewModel(IFilmManager filmManager, IViewModelFactory viewModelFactory)
         {
-            this.cinemaManager = cinemaManager;
+            this.filmManager = filmManager;
             addFilmCommand = new DelegateCommand(AddFilm, () => CanAddFilm);
             addFilmCrewViewModel = viewModelFactory.CreateAddFilmCrewViewModel();
             addFilmCrewViewModel.FilmCrewPrepared += (sender, e) =>
@@ -76,7 +76,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         public void AddFilm()
         {
-            cinemaManager.AddFilm(new Film(Title, 
+            filmManager.AddFilm(new Film(Title, 
                 SelectedDate, 
                 SelectedLanguage, 
                 new FilmCrew(addFilmCrewViewModel.Director, 
