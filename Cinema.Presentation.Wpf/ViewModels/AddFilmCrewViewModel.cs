@@ -117,7 +117,6 @@ namespace Cinema.Presentation.Wpf.ViewModels
                 if (filmCrew.Position == ActorTag)
                 {
                     actors.Add(new Actor(new Human(filmCrew.Name, filmCrew.Surname)));
-                    break;
                 }
             }
 
