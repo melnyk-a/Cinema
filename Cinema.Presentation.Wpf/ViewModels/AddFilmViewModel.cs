@@ -89,7 +89,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
         public void ResetValues()
         {
             SelectedLanguage = Language.Unspecified;
-            SelectedDate = DateTime.MinValue;
+            SelectedDate = DateTime.Now;
             Title = string.Empty;
             addFilmCrewViewModel.ResetValues();
         }
