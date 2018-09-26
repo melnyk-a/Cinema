@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSources", "DataSources"
 		DataSources\Films.sql = DataSources\Films.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Data.SqlServerOdbc", "Cinema.Data.SqlServerOdbc\Cinema.Data.SqlServerOdbc.csproj", "{CC074DEE-9286-492E-8B09-473CB0B0790A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{46DE9AA0-188B-415A-BB3E-1D14E11ECB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46DE9AA0-188B-415A-BB3E-1D14E11ECB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46DE9AA0-188B-415A-BB3E-1D14E11ECB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC074DEE-9286-492E-8B09-473CB0B0790A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC074DEE-9286-492E-8B09-473CB0B0790A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC074DEE-9286-492E-8B09-473CB0B0790A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC074DEE-9286-492E-8B09-473CB0B0790A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{C9B3BBD3-FD42-4731-9FF5-98762F06492C} = {19F8224F-FE14-4E20-B33D-34D94073BABA}
 		{391A6AA9-1441-41F0-BE9A-AB5AC40D19A8} = {81838BFD-3EF0-4BF2-9996-44349F601E3D}
 		{46DE9AA0-188B-415A-BB3E-1D14E11ECB81} = {19F8224F-FE14-4E20-B33D-34D94073BABA}
+		{CC074DEE-9286-492E-8B09-473CB0B0790A} = {81838BFD-3EF0-4BF2-9996-44349F601E3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D27EAAE0-613E-438B-A9D4-EF77C7CAF18F}
