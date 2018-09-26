@@ -28,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinemas", "Cinemas\Cinemas.csproj", "{46DE9AA0-188B-415A-BB3E-1D14E11ECB81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSources", "DataSources", "{3F97D670-7811-48D4-AE29-1E2905339198}"
+	ProjectSection(SolutionItems) = preProject
+		DataSources\Films.sql = DataSources\Films.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
