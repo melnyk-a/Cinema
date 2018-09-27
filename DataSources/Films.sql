@@ -28,10 +28,17 @@ create table Humans
 );
 go
 
-create table Positions
+create table Actors
 (
-	Id int not null identity(1,1) primary key,
-	Name nvarchar(100) not null unique
+Id int not null identity(1,1) primary key,
+HumanId int not null
+);
+go
+
+create table Directors
+(
+Id int not null identity(1,1) primary key,
+HumanId int not null
 );
 go
 
@@ -44,30 +51,50 @@ create table Films
 );
 go
 
-create table HumansFilmsPositions
+create table ActorsFilms
 (
-	Id int not null identity(1,1) primary key,
-	HumanId int not null,
-	PositionId int not null,
-	FilmId int not null
+Id int not null identity(1,1) primary key,
+ActorId int not null,
+FilmId int not null
 );
+go
+
+create table DirectorsFilms
+(
+Id int not null identity(1,1) primary key,
+DirectorId int not null,
+FilmId int not null
+);
+go
+
+alter table Actors
+add foreign key (HumanId) references Humans(Id);
+go
+
+alter table Directors
+add foreign key (HumanId) references Humans(Id);
 go
 
 alter table Films
 add foreign key (LanguageId) references Languages(Id);
 go
 
-alter table HumansFilmsPositions
-add foreign key (HumanId) references Humans(Id);
+alter table ActorsFilms
+add foreign key (ActorId) references Actors(Id);
 go
 
-alter table HumansFilmsPositions
-add foreign key (PositionId) references Positions(Id);
-go
-
-alter table HumansFilmsPositions
+alter table ActorsFilms
 add foreign key (FilmId) references Films(Id);
 go
+
+alter table DirectorsFilms
+add foreign key (DirectorId) references Directors(Id);
+go
+
+alter table DirectorsFilms
+add foreign key (FilmId) references Films(Id);
+go
+
 
 insert into Languages (Name) values
 	(N'Arabic'),
@@ -92,10 +119,6 @@ insert into Humans (Name, Surname) values
 	(N'Annette', N'Bening');
 go
 
-insert into Positions (Name) values
-	(N'Director'),
-	(N'Actor');
-go
 
 insert into Films (Title, LanguageId, ReleaseDate) values
 	(N'The House with a Clock in Its Walls', 2, '09-27-2018'),
@@ -103,17 +126,39 @@ insert into Films (Title, LanguageId, ReleaseDate) values
 	(N'Life Itself', 6, '09-21-2018');
 go
 
-insert into HumansFilmsPositions (HumanId, PositionId, FilmId) values 
-	(1,1,1),
-	(2,2,1),
-	(3,2,1),
-	(4,2,1),
-	(5,1,2),
-	(6,2,2),
-	(5,2,2),
-	(7,2,2),
-	(8,1,3),
-	(9,2,3),
-	(10,2,3),
-	(11,2,3);
+insert into Actors (HumanId) values
+	(2),
+	(3),
+	(4),
+	(5),
+	(6),
+	(7),
+	(9),
+	(10),
+	(11);
+go
+
+insert into Directors(HumanId) values
+	(1),
+	(5),
+	(8);
+go
+
+insert into ActorsFilms(ActorId, FilmId) values
+	(1, 1),
+	(2, 1),
+	(3, 1),
+	(4, 2),
+	(5, 2),
+	(6, 2),
+	(7, 3),
+	(8, 3),
+	(9, 1),
+	(9, 3);
+go
+
+insert into DirectorsFilms(DirectorId, FilmId) values
+	(1, 1),
+	(2, 2),
+	(3, 3);
 go
