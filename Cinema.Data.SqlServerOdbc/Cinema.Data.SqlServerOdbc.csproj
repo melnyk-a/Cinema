@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\FilmDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerOdbcFilmDataGateway.cs" />
     <Compile Include="SqlServerOdbcFilmDataService.cs" />
