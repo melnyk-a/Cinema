@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Odbc;
-using Cinema.Data.SqlServerOdbc.Dtos;
+﻿using Cinema.Data.SqlServerOdbc.Dtos;
 using Cinema.Domain.Models;
 using Cinema.Domain.Models.JobTitles;
 using Cinemas;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Odbc;
 
 namespace Cinema.Data.SqlServerOdbc
 {
@@ -28,7 +28,25 @@ namespace Cinema.Data.SqlServerOdbc
 
         public void AddFilm(Film film)
         {
-            throw new System.NotImplementedException();
+            OdbcTransaction transaction = Connection.BeginTransaction();
+            OdbcCommand command = Connection.CreateCommand();
+            command.Transaction = transaction;
+
+            try
+            {
+                int langageId = GetLanguageId(command, film.Language);
+                int filmId = FillFilmsTable(command, film.Title, film.ReleaseDate, langageId);
+                FillDirectorsTable(command, film.FilmCrew.Director, filmId);
+                foreach(Actor actor in film.FilmCrew.Actors)
+                {
+                    FillActorsTable(command, actor, filmId);
+                }
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+            }
         }
 
         private IEnumerable<Actor> CreateActorsList(FilmDto filmDto)
@@ -87,6 +105,77 @@ namespace Cinema.Data.SqlServerOdbc
             return new Film(filmDto.Title, filmDto.ReleaseDate, filmDto.Language, new FilmCrew(director, actors));
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (connection.IsValueCreated)
+            {
+                connection.Value.Close();
+            }
+        }
+
+        private void FillActorsTable(OdbcCommand command, Actor actor, int filmId)
+        {
+            command.CommandText = "{call AddActor(?, ?, ?)}";
+            command.Parameters.Clear();
+
+            command.Parameters.Add(new OdbcParameter("@name", OdbcType.NVarChar, 100)
+            {
+                Value = actor.Human.Name
+            });
+            command.Parameters.Add(new OdbcParameter("@surname", OdbcType.NVarChar, 100)
+            {
+                Value = actor.Human.Surname
+            });
+            command.Parameters.Add(new OdbcParameter("@filmId", OdbcType.Int)
+            {
+                Value = filmId
+            });
+
+            command.ExecuteNonQuery();
+        }
+
+        private void FillDirectorsTable(OdbcCommand command, Director director, int filmId)
+        {
+            command.CommandText = "{call AddDirector(?, ?, ?)}";
+            command.Parameters.Clear();
+
+            command.Parameters.Add(new OdbcParameter("@name", OdbcType.NVarChar, 100)
+            {
+                Value = director.Human.Name
+            });
+            command.Parameters.Add(new OdbcParameter("@surname", OdbcType.NVarChar, 100)
+            {
+                Value = director.Human.Surname
+            });
+            command.Parameters.Add(new OdbcParameter("@filmId", OdbcType.Int)
+            {
+                Value = filmId
+            });
+
+            command.ExecuteNonQuery();
+        }
+
+        private int FillFilmsTable(OdbcCommand command, string title, DateTime releaseDate, int langageId)
+        {
+            command.CommandText = "{? = call AddFilm(?, ?, ?)}";
+
+            OdbcParameter filmId = command.Parameters.AddWithValue("@return_value", OdbcType.Int);
+            filmId.Direction = ParameterDirection.ReturnValue;
+
+            OdbcParameter titleParameter = command.Parameters.Add("@title", OdbcType.NVarChar, 100);
+            titleParameter.Value = title;
+
+            OdbcParameter releaseDateParameter = command.Parameters.Add("@releaseDate", OdbcType.DateTime);
+            releaseDateParameter.Value = releaseDate.ToString();
+
+            OdbcParameter languageParameter = command.Parameters.Add("@languageId", OdbcType.Int);
+            languageParameter.Value = langageId;
+
+            command.ExecuteNonQuery();
+
+            return (int)filmId.Value;
+        }
+
         public IEnumerable<Film> GetAllFilms()
         {
             var filmsDtos = new List<FilmDto>();
@@ -123,12 +212,11 @@ namespace Cinema.Data.SqlServerOdbc
             return films;
         }
 
-        protected override void Dispose(bool disposing)
+        private int GetLanguageId(OdbcCommand command, Language language)
         {
-            if (connection.IsValueCreated)
-            {
-                connection.Value.Close();
-            }
+            command.CommandText = $"select Id from Languages where Languages.Name = N'{language.ToString()}'";
+            int result = (int)command.ExecuteScalar();
+            return result;
         }
     }
 }
