@@ -2,7 +2,7 @@
 {
     public abstract class JobTitle
     {
-        private Human human;
+        private readonly Human human;
 
         public JobTitle(Human human)
         {
