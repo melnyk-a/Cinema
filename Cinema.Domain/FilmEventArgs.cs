@@ -5,13 +5,13 @@ namespace Cinema.Domain
 {
     public sealed class FilmEventArgs : EventArgs
     {
-        private readonly Film addedFilm;
+        private readonly Film film;
 
-        public FilmEventArgs(Film addedFilm)
+        public FilmEventArgs(Film film)
         {
-            this.addedFilm = addedFilm;
+            this.film = film;
         }
 
-        public Film AddedFilm => addedFilm;
+        public Film Film => film;
     }
 }
