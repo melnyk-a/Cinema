@@ -170,3 +170,52 @@ begin
 	(@title, @releaseDate , @languageId)
 	return  ident_current('Films');
 end
+go
+
+create or alter procedure AddActor @name nvarchar(100), @surname nvarchar(100), @filmId int
+as
+begin
+	begin transaction
+	begin try
+		begin
+			insert into Humans(Name, Surname) values
+			(@name, @surname);
+			insert into Actors(HumanId) values
+			(ident_current('Humans'));
+			insert into ActorsFilms(ActorId, FilmId) values
+			(ident_current('Actors'), @filmId);
+			commit transaction;
+		end
+	end try
+	begin catch
+		begin
+			rollback  transaction;
+			raiserror('Incorrect actor data', 3, 1);
+		end
+	end catch
+end
+go
+
+create or alter procedure AddDirector @name nvarchar(100), @surname nvarchar(100), @filmId int
+as
+begin
+	begin transaction
+	begin try
+		begin
+			insert into Humans(Name, Surname) values
+			(@name, @surname);
+			insert into Directors(HumanId) values
+			(ident_current('Humans'));
+			insert into DirectorsFilms(DirectorId, FilmId) values
+			(ident_current('Directors'), @filmId);
+			commit transaction;
+		end
+	end try
+	begin catch
+		begin
+			rollback  transaction;
+			raiserror('Incorrect director data', 3, 1);
+		end
+	end catch
+end
+go
