@@ -162,3 +162,11 @@ insert into DirectorsFilms(DirectorId, FilmId) values
 	(2, 2),
 	(3, 3);
 go
+
+create or alter procedure AddFilm @title nvarchar(100), @releaseDate dateTime, @languageId int
+as
+begin
+	insert into Films(Title, ReleaseDate, LanguageId) values
+	(@title, @releaseDate , @languageId)
+	return  ident_current('Films');
+end
