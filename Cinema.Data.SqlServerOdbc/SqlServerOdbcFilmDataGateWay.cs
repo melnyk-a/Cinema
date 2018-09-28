@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Odbc;
 using Cinema.Data.SqlServerOdbc.Dtos;
 using Cinema.Domain.Models;
@@ -16,7 +17,7 @@ namespace Cinema.Data.SqlServerOdbc
         {
             connection = new Lazy<OdbcConnection>(() =>
             {
-                var connection = new OdbcConnection($"Driver={{SQL Server}};Server={Environment.MachineName};Database=Films;Trusted_Security=Yes;");
+                var connection = new OdbcConnection($"Driver={{SQL Server}};Server=(local);Database=Films;Trusted_Security=Yes;");
                 connection.Open();
 
                 return connection;
@@ -104,7 +105,7 @@ namespace Cinema.Data.SqlServerOdbc
                     {
                         Id = (int)reader["Id"],
                         Language = (Language)Enum.Parse(typeof(Language), (string)reader["Language"]),
-                        ReleaseDate = DateTime.Parse((string)reader["ReleaseDate"]),
+                        ReleaseDate = (DateTime)reader["ReleaseDate"],
                         Title = (string)reader["Title"]
                     };
                     filmsDtos.Add(filmDto);
