@@ -26,7 +26,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
             filmProvider.FilmAdded += (sender, e) =>
              {
-                 var viewModel = viewModelFactory.CreateFilmViewModel(e.AddedFilm);
+                 var viewModel = viewModelFactory.CreateFilmViewModel(e.Film);
                  films.Add(viewModel);
              };
         }

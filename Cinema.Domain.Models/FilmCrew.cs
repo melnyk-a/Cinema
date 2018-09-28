@@ -5,7 +5,7 @@ namespace Cinema.Domain.Models
 {
     public sealed class FilmCrew
     {
-        private readonly IEnumerable<Actor> actors = new List<Actor>();
+        private readonly IEnumerable<Actor> actors;
         private readonly Director director;
 
         public FilmCrew(Director director, IEnumerable<Actor> actors)
