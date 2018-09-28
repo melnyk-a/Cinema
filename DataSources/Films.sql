@@ -46,7 +46,7 @@ create table Films
 (
 	Id int not null identity(1,1) primary key,
 	Title nvarchar(100) not null,
-	ReleaseDate date not null,
+	ReleaseDate datetime not null,
 	LanguageId int not null
 );
 go
