@@ -1,5 +1,4 @@
-﻿using Cinema.Data.SqlServerOdbc.Dtos;
-using Cinema.Domain.Models;
+﻿using Cinema.Domain.Models;
 using Cinema.Domain.Models.JobTitles;
 using Cinema.Utilities.Data.Dtos;
 using Cinemas;
