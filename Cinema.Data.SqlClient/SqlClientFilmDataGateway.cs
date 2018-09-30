@@ -5,6 +5,7 @@ using Cinemas;
 using System.Data.SqlClient;
 using Cinema.Utilities.Data.Dtos;
 using Cinema.Domain.Models.JobTitles;
+using System.Data;
 
 namespace Cinema.Data.SqlClient
 {
@@ -27,7 +28,25 @@ namespace Cinema.Data.SqlClient
 
         public void AddFilm(Film film)
         {
-            throw new System.NotImplementedException();
+            SqlTransaction transaction = Connection.BeginTransaction();
+            SqlCommand command = Connection.CreateCommand();
+            command.Transaction = transaction;
+
+            try
+            {
+                int langageId = GetLanguageId(command, film.Language);
+                int filmId = FillFilmsTable(command, film.Title, film.ReleaseDate, langageId);
+                FillDirectorsTable(command, film.FilmCrew.Director, filmId);
+                foreach (Actor actor in film.FilmCrew.Actors)
+                {
+                    FillActorsTable(command, actor, filmId);
+                }
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+            }
         }
 
         private IEnumerable<Actor> CreateActorsList(FilmDto filmDto)
@@ -94,6 +113,72 @@ namespace Cinema.Data.SqlClient
             }
         }
 
+        private void FillActorsTable(SqlCommand command, Actor actor, int filmId)
+        {
+            command.CommandText = "AddActor";
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Clear();
+
+            command.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar, 100)
+            {
+                Value = actor.Human.Name
+            });
+            command.Parameters.Add(new SqlParameter("@surname", SqlDbType.NVarChar, 100)
+            {
+                Value = actor.Human.Surname
+            });
+            command.Parameters.Add(new SqlParameter("@filmId", SqlDbType.Int)
+            {
+                Value = filmId
+            });
+
+            command.ExecuteNonQuery();
+        }
+
+        private void FillDirectorsTable(SqlCommand command, Director director, int filmId)
+        {
+            command.CommandText = "AddDirector";
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Clear();
+
+            command.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar, 100)
+            {
+                Value = director.Human.Name
+            });
+            command.Parameters.Add(new SqlParameter("@surname", SqlDbType.NVarChar, 100)
+            {
+                Value = director.Human.Surname
+            });
+            command.Parameters.Add(new SqlParameter("@filmId", SqlDbType.Int)
+            {
+                Value = filmId
+            });
+
+            command.ExecuteNonQuery();
+        }
+
+        private int FillFilmsTable(SqlCommand command, string title, DateTime releaseDate, int langageId)
+        {
+            command.CommandText = "AddFilm";
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter titleParameter = command.Parameters.Add("@title", SqlDbType.NVarChar, 100);
+            titleParameter.Value = title;
+
+            SqlParameter releaseDateParameter = command.Parameters.Add("@releaseDate", SqlDbType.DateTime);
+            releaseDateParameter.Value = releaseDate.ToString();
+
+            SqlParameter languageParameter = command.Parameters.Add("@languageId", SqlDbType.Int);
+            languageParameter.Value = langageId;
+
+            SqlParameter filmId = command.Parameters.AddWithValue("@return_value", SqlDbType.Int);
+            filmId.Direction = ParameterDirection.ReturnValue;
+
+            command.ExecuteNonQuery();
+
+            return (int)filmId.Value;
+        }
+
         public IEnumerable<Film> GetAllFilms()
         {
             var filmDtos = new List<FilmDto>();
@@ -128,6 +213,13 @@ namespace Cinema.Data.SqlClient
             }
 
             return films;
+        }
+
+        private int GetLanguageId(SqlCommand command, Language language)
+        {
+            command.CommandText = $"select Id from Languages where Languages.Name = N'{language.ToString()}'";
+            int result = (int)command.ExecuteScalar();
+            return result;
         }
     }
 }
