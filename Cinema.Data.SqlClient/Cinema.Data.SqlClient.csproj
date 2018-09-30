@@ -53,6 +53,10 @@
       <Project>{875df3a0-6277-433d-9418-a99877b391e3}</Project>
       <Name>Cinema.Domain.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cinema.Utilities.Data\Cinema.Utilities.Data.csproj">
+      <Project>{217c18d9-ff7a-46da-a671-6912fe159c37}</Project>
+      <Name>Cinema.Utilities.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cinemas\Cinemas.csproj">
       <Project>{46de9aa0-188b-415a-bb3e-1d14e11ecb81}</Project>
       <Name>Cinemas</Name>
