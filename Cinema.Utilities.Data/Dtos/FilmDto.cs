@@ -1,9 +1,9 @@
 ﻿using Cinema.Domain.Models;
 using System;
 
-namespace Cinema.Data.SqlServerOdbc.Dtos
+namespace Cinema.Utilities.Data.Dtos
 {
-    internal sealed class FilmDto
+    public sealed class FilmDto
     {
         public int Id { get; set; }
 
