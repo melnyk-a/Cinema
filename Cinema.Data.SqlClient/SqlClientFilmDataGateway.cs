@@ -4,7 +4,7 @@ using Cinemas;
 
 namespace Cinema.Data.SqlClient
 {
-    internal sealed class SqlClientFilmDatGateway : DisposableObject, IFilmDataGateway
+    internal sealed class SqlClientFilmDataGateway : DisposableObject, IFilmDataGateway
     {
         public void AddFilm(Film film)
         {

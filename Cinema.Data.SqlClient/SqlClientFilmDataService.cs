@@ -4,7 +4,7 @@
     {
         public IFilmDataGateway OpenDataGateway()
         {
-            return new SqlClientFilmDatGateway();
+            return new SqlClientFilmDataGateway();
         }
     }
 }

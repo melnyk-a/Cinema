@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlClientFilmDataService.cs" />
-    <Compile Include="SqlClientFilmDatGateway.cs" />
+    <Compile Include="SqlClientFilmDataGateway.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">
