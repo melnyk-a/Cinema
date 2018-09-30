@@ -30,14 +30,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
         {
             this.viewModelFactory = viewModelFactory;
 
-            addActorCommand = new DelegateCommand(() =>
-                crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, ActorTag)),
-                () => CanAddActor
-            );
-            addDirectorCommand = new DelegateCommand(() =>
-                crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, DirectorTag)),
-                () => CanAddDirector
-            );
+            addActorCommand = new DelegateCommand(AddActor, () => CanAddActor);
+            addDirectorCommand = new DelegateCommand(AddDirector, () => CanAddDirector);
 
             PropertyChanged += (sender, e) =>
                  {
@@ -65,8 +59,20 @@ namespace Cinema.Presentation.Wpf.ViewModels
             set => SetProperty(ref actorSurname, value);
         }
 
+        private void AddActor()
+        {
+            crews.Add(viewModelFactory.CreateFilmCrewViewModel(actorName, actorSurname, ActorTag));
+            ResetActorValue();
+        }
+
         [RaiseCanExecuteDependsUpon(nameof(CanAddActor))]
         public ICommand AddActorCommand => addActorCommand;
+
+        private void AddDirector()
+        {
+            crews.Add(viewModelFactory.CreateFilmCrewViewModel(directorName, directorSurname, DirectorTag));
+            ResetDirectorValue();
+        }
 
         [RaiseCanExecuteDependsUpon(nameof(CanAddDirector))]
         public ICommand AddDirectorCommand => addDirectorCommand;
@@ -144,12 +150,22 @@ namespace Cinema.Presentation.Wpf.ViewModels
             FilmCrewPrepared?.Invoke(this, e);
         }
 
-        public void ResetValues()
+        private void ResetActorValue()
         {
             ActorName = string.Empty;
             ActorSurname = string.Empty;
+        }
+
+        private void ResetDirectorValue()
+        {
             DirectorName = string.Empty;
             DirectorSurname = string.Empty;
+        }
+
+        public void ResetValues()
+        {
+            ResetActorValue();
+            ResetDirectorValue();
             crews.Clear();
         }
     }
