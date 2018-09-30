@@ -4,7 +4,7 @@
     {
         public IFilmDataGateway OpenDataGateway()
         {
-            throw new System.NotImplementedException();
+            return new SqlClientFilmDatGateway();
         }
     }
 }
