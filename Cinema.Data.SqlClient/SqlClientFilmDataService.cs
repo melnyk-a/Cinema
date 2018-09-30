@@ -1,6 +1,6 @@
 ﻿namespace Cinema.Data.SqlClient
 {
-    public sealed class SqlClientDataService : IFilmDataService
+    public sealed class SqlClientFilmDataService : IFilmDataService
     {
         public IFilmDataGateway OpenDataGateway()
         {
