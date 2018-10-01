@@ -14,6 +14,8 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICollection<FilmViewModel> films = new ObservableCollection<FilmViewModel>();
         private readonly IViewModelFactory viewModelFactory;
 
+        private FilmViewModel selectedFilm;
+
         public FilmListViewModel(IFilmProvider filmProvider, IViewModelFactory viewModelFactory)
         {
             this.viewModelFactory = viewModelFactory;
@@ -30,8 +32,15 @@ namespace Cinema.Presentation.Wpf.ViewModels
                  films.Add(viewModel);
              };
         }
+
+        public ICommand AddFilmCommand => addFilmCommand;
+
         public IEnumerable<FilmViewModel> Films => films;
 
-        public ICommand AddFilmCommand =>  addFilmCommand;
+        public FilmViewModel SelectedFilm
+        {
+            get => selectedFilm;
+            set => SetProperty(ref selectedFilm, value);
+        }
     }
 }
