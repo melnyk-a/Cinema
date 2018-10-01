@@ -19,7 +19,7 @@ namespace Cinema.Domain.Models
 
         public FilmCrew FilmCrew => filmCrew;
 
-        public bool? HasBluRayRelease { get; set; }
+        public bool? HasBlurayRelease { get; set; }
 
         public Language Language => language;
 
