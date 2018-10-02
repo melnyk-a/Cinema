@@ -4,6 +4,7 @@ using Cinema.Utilities.Data.Dtos;
 using Cinemas;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -17,7 +18,10 @@ namespace Cinema.Data.SqlClient
         {
             connection = new Lazy<SqlConnection>(() =>
             {
-                var connection = new SqlConnection("Server = (local); Database = Films; Trusted_Connection = True");
+                string connectionString = ConfigurationManager
+                    .ConnectionStrings["SqlConnection"]
+                    .ConnectionString;
+                var connection = new SqlConnection(connectionString);
                 connection.Open();
 
                 return connection;
