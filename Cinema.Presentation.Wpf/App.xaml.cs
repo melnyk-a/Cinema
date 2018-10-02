@@ -14,7 +14,7 @@ namespace Cinema.Presentation.Wpf
             
             container.Bind(
                 configurator => configurator
-                .From("Cinema.Data.SqlServerOdbc", "Cinema.Domain", "Cinema.Presentation.Wpf")
+                .From("Cinema.Data.SqlClient", "Cinema.Domain", "Cinema.Presentation.Wpf")
                 .SelectAllClasses() 
                 .BindAllInterfaces()
                 .ConfigureFor<ViewModelManager>(config => config.InSingletonScope())
