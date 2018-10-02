@@ -17,6 +17,7 @@ namespace Cinema.Data.XmlXDocument
         private const string FilmCrewElementName = "FilmCrew";
         private const string FilmElementName = "Film";
         private const string FilmsElementName = "Films";
+        private const string BlureyReleaseAttribute = "BlurayRelease";
         private const string LanguageAttribute = "Language";
         private const string NameAttribute = "Name";
         private const string ReleaseDateAttribute = "ReleaseDate";
@@ -28,7 +29,7 @@ namespace Cinema.Data.XmlXDocument
 
         public XmlXDocumentFilmDataGateway()
         {
-            document = new Lazy<XDocument>(OpenXmlFile); 
+            document = new Lazy<XDocument>(OpenXmlFile);
         }
 
         private XDocument Document => document.Value;
@@ -37,18 +38,18 @@ namespace Cinema.Data.XmlXDocument
         {
             XElement actors = new XElement(ActorsElementName);
 
-            foreach(Actor actor in film.FilmCrew.Actors)
+            foreach (Actor actor in film.FilmCrew.Actors)
             {
                 actors.Add(
                     new XElement(
-                        ActorElementName, 
+                        ActorElementName,
                         new XAttribute(NameAttribute, actor.Human.Name),
                         new XAttribute(SurnameAttribute, actor.Human.Surname)));
             }
             XElement filmCrew = new XElement(
-                FilmCrewElementName, 
+                FilmCrewElementName,
                 new XElement(
-                    DirectorElementName, 
+                    DirectorElementName,
                      new XAttribute(NameAttribute, film.FilmCrew.Director.Human.Name),
                      new XAttribute(SurnameAttribute, film.FilmCrew.Director.Human.Surname)),
                 actors);
@@ -59,8 +60,9 @@ namespace Cinema.Data.XmlXDocument
                      filmCrew,
                      new XAttribute(TitleAttribute, film.Title),
                      new XAttribute(LanguageAttribute, film.Language.ToString()),
-                     new XAttribute(ReleaseDateAttribute, film.ReleaseDate.ToShortDateString())));
-                             
+                     new XAttribute(ReleaseDateAttribute, film.ReleaseDate.ToShortDateString()),
+                     new XAttribute(BlureyReleaseAttribute, film.HasBlurayRelease.ToString() ?? string.Empty)));
+
             isSaveRequired = true;
         }
 
@@ -80,6 +82,7 @@ namespace Cinema.Data.XmlXDocument
             DateTime releaseDate;
             Language language;
             Director director;
+            bool? hasBlurayRelease;
             ICollection<Actor> actors = new List<Actor>();
             FilmCrew filmCrew;
 
@@ -90,6 +93,9 @@ namespace Cinema.Data.XmlXDocument
                 releaseDate = DateTime.Parse(filmElement.Attribute(ReleaseDateAttribute).Value);
                 language = (Language)Enum.Parse(typeof(Language), filmElement.Attribute(LanguageAttribute).Value);
 
+                string blurayRelease = filmElement.Attribute(BlureyReleaseAttribute).Value;
+                hasBlurayRelease = string.IsNullOrEmpty(blurayRelease) ? (bool?)null : Convert.ToBoolean(blurayRelease);
+
                 XElement directorElement = filmElement.Element(FilmCrewElementName).Element(DirectorElementName);
                 director = new Director(new Human(directorElement.Attribute(NameAttribute).Value, directorElement.Attribute(SurnameAttribute).Value));
                 IEnumerable<XElement> actorElements = filmElement.Element(FilmCrewElementName).Element(ActorsElementName).Elements(ActorElementName);
@@ -98,7 +104,7 @@ namespace Cinema.Data.XmlXDocument
                     actors.Add(new Actor(new Human(actorElement.Attribute(NameAttribute).Value, actorElement.Attribute(SurnameAttribute).Value)));
                 }
                 filmCrew = new FilmCrew(director, actors);
-                films.Add(new Film(title, releaseDate, language, filmCrew));
+                films.Add(new Film(title, releaseDate, language, filmCrew) { HasBlurayRelease = hasBlurayRelease });
                 actors.Clear();
             }
 

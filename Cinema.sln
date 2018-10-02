@@ -30,6 +30,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSources", "DataSources", "{3F97D670-7811-48D4-AE29-1E2905339198}"
 	ProjectSection(SolutionItems) = preProject
 		DataSources\Films.sql = DataSources\Films.sql
+		DataSources\Films.xml = DataSources\Films.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Data.SqlServerOdbc", "Cinema.Data.SqlServerOdbc\Cinema.Data.SqlServerOdbc.csproj", "{CC074DEE-9286-492E-8B09-473CB0B0790A}"

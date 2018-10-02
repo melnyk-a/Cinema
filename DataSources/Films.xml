@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Films>
-  <Film Title="The House with a Clock in Its Walls" Language="English" ReleaseDate="27-Sep-18">
+  <Film Title="The House with a Clock in Its Walls" Language="English" ReleaseDate="27-Sep-18" BlurayRelease="">
     <FilmCrew>
       <Director Name="Eli" Surname="Roth" />
       <Actors>
@@ -10,7 +10,7 @@
       </Actors>
     </FilmCrew>
   </Film>
-  <Film Title="Fahrenheit 11/9" Language="English" ReleaseDate="21-Sep-18">
+  <Film Title="Fahrenheit 11/9" Language="English" ReleaseDate="21-Sep-18" BlurayRelease="">
     <FilmCrew>
       <Director Name="Michael" Surname="Moore" />
       <Actors>
@@ -20,13 +20,29 @@
       </Actors>
     </FilmCrew>
   </Film>
-  <Film Title="Life Itself" Language="Spanish" ReleaseDate="21-Sep-18">
+  <Film Title="Life Itself" Language="Spanish" ReleaseDate="21-Sep-18" BlurayRelease="">
     <FilmCrew>
       <Director Name="Dan" Surname="Fogelman" />
       <Actors>
         <Actor Name="Oscar" Surname="Isaac" />
         <Actor Name="Olivia" Surname="Wilde" />
         <Actor Name="Annette" Surname="Bening" />
+      </Actors>
+    </FilmCrew>
+  </Film>
+  <Film Title="A Star Is Born" Language="English" ReleaseDate="05-Oct-18" BlurayRelease="">
+    <FilmCrew>
+      <Director Name="Bradley" Surname="Cooper" />
+      <Actors>
+        <Actor Name="Lady" Surname="Gaga" />
+      </Actors>
+    </FilmCrew>
+  </Film>
+  <Film Title="Beautiful Boy" Language="English" ReleaseDate="12-Oct-18" BlurayRelease="True">
+    <FilmCrew>
+      <Director Name="Felix" Surname="Van Groeningen" />
+      <Actors>
+        <Actor Name="Steve" Surname="Carell" />
       </Actors>
     </FilmCrew>
   </Film>
