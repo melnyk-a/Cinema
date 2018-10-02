@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Cinema.Domain.Models;
-using Cinemas;
-using System.Data.SqlClient;
-using Cinema.Utilities.Data.Dtos;
+﻿using Cinema.Domain.Models;
 using Cinema.Domain.Models.JobTitles;
+using Cinema.Utilities.Data.Dtos;
+using Cinemas;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Cinema.Data.SqlClient
 {
@@ -17,11 +18,22 @@ namespace Cinema.Data.SqlClient
         {
             connection = new Lazy<SqlConnection>(() =>
             {
-                var connection = new SqlConnection("Server = (local); Database = Films; Trusted_Connection = True");
+                string connectionString = ConfigurationManager
+                    .ConnectionStrings["SqlConnection"]
+                    .ConnectionString;
+                var connection = new SqlConnection(connectionString);
                 connection.Open();
 
                 return connection;
             });
+        }
+        private void AddBlurayRelease(SqlCommand command, int filmId, bool hasBlurayRelease)
+        {
+            string value = hasBlurayRelease ? "1" : "0";
+            command.CommandText = $@"update Films 
+                                    set HasBlurayRelease = {value} 
+                                    where Id = {filmId}";
+            command.ExecuteNonQuery();
         }
 
         private SqlConnection Connection => connection.Value;
@@ -36,6 +48,10 @@ namespace Cinema.Data.SqlClient
             {
                 int langageId = GetLanguageId(command, film.Language);
                 int filmId = FillFilmsTable(command, film.Title, film.ReleaseDate, langageId);
+                if (film.HasBlurayRelease != null)
+                {
+                    AddBlurayRelease(command, filmId, film.HasBlurayRelease.Value);
+                }
                 FillDirectorsTable(command, film.FilmCrew.Director, filmId);
                 foreach (Actor actor in film.FilmCrew.Actors)
                 {
@@ -102,7 +118,7 @@ namespace Cinema.Data.SqlClient
             Director director = CreateDirector(filmDto);
             IEnumerable<Actor> actors = CreateActorsList(filmDto);
 
-            return new Film(filmDto.Title, filmDto.ReleaseDate, filmDto.Language, new FilmCrew(director, actors));
+            return new Film(filmDto.Title, filmDto.ReleaseDate, filmDto.Language, new FilmCrew(director, actors)) { HasBlurayRelease = filmDto.HasBlurayRelease};
         }
 
         protected override void Dispose(bool disposing)
@@ -184,7 +200,7 @@ namespace Cinema.Data.SqlClient
             var filmDtos = new List<FilmDto>();
 
             var command = new SqlCommand(
-                @"select Films.Id, Title, Languages.Name as Language, ReleaseDate
+                @"select Films.Id, Title, Languages.Name as Language, ReleaseDate, HasBlurayRelease
                   from Films inner join Languages on Films.LanguageId = Languages.Id",
                 Connection
             );
@@ -200,6 +216,9 @@ namespace Cinema.Data.SqlClient
                         ReleaseDate = (DateTime)reader["ReleaseDate"],
                         Title = (string)reader["Title"]
                     };
+                    object blurayRelease = reader["HasBlurayRelease"];
+                    filmDto.HasBlurayRelease = Convert.IsDBNull(blurayRelease) ? null : (bool?)blurayRelease;
+
                     filmDtos.Add(filmDto);
                 }
             }

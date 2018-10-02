@@ -19,6 +19,8 @@ namespace Cinema.Domain.Models
 
         public FilmCrew FilmCrew => filmCrew;
 
+        public bool? HasBlurayRelease { get; set; }
+
         public Language Language => language;
 
         public DateTime ReleaseDate => releaseDate;

@@ -30,6 +30,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSources", "DataSources", "{3F97D670-7811-48D4-AE29-1E2905339198}"
 	ProjectSection(SolutionItems) = preProject
 		DataSources\Films.sql = DataSources\Films.sql
+		DataSources\Films.xml = DataSources\Films.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Data.SqlServerOdbc", "Cinema.Data.SqlServerOdbc\Cinema.Data.SqlServerOdbc.csproj", "{CC074DEE-9286-492E-8B09-473CB0B0790A}"
@@ -37,6 +38,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Data.SqlClient", "Cinema.Data.SqlClient\Cinema.Data.SqlClient.csproj", "{2C8E7E3C-F8E4-46AE-963A-722161769D7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Utilities.Data", "Cinema.Utilities.Data\Cinema.Utilities.Data.csproj", "{217C18D9-FF7A-46DA-A671-6912FE159C37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{8D4C5835-2BBE-487F-96FE-E4EBF6DA1B5A}"
+	ProjectSection(SolutionItems) = preProject
+		DataSources\Migrations\FilmMigrationDown.sql = DataSources\Migrations\FilmMigrationDown.sql
+		DataSources\Migrations\FilmMigrationUp.sql = DataSources\Migrations\FilmMigrationUp.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +111,7 @@ Global
 		{CC074DEE-9286-492E-8B09-473CB0B0790A} = {81838BFD-3EF0-4BF2-9996-44349F601E3D}
 		{2C8E7E3C-F8E4-46AE-963A-722161769D7F} = {81838BFD-3EF0-4BF2-9996-44349F601E3D}
 		{217C18D9-FF7A-46DA-A671-6912FE159C37} = {19F8224F-FE14-4E20-B33D-34D94073BABA}
+		{8D4C5835-2BBE-487F-96FE-E4EBF6DA1B5A} = {3F97D670-7811-48D4-AE29-1E2905339198}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D27EAAE0-613E-438B-A9D4-EF77C7CAF18F}

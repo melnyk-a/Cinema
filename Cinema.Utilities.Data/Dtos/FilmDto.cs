@@ -7,6 +7,8 @@ namespace Cinema.Utilities.Data.Dtos
     {
         public int Id { get; set; }
 
+        public bool? HasBlurayRelease { get; set; }
+
         public Language Language { get; set; }
 
         public DateTime ReleaseDate { get; set; }

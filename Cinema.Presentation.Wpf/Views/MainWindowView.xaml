@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Cinema" 
         Height="450" 
-        Width="400"
+        Width="600"
         WindowStartupLocation="CenterScreen">
     <ContentPresenter Margin="5" Content="{Binding Current}"/>
 </Window>

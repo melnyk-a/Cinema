@@ -1,39 +1,34 @@
 ﻿using Cinema.Domain;
-using Cinema.Presentation.Wpf.ViewModels;
-using Cinema.Presentation.Wpf.ViewModels.Factories;
 using Cinema.Presentation.Wpf.Views;
-using StructureMap;
-using StructureMap.AutoFactory;
+using Ninject;
+using Ninject.Extensions.Conventions;
 using System.Windows;
 
 namespace Cinema.Presentation.Wpf
 {
     internal partial class App : Application
     {
-        private Container CreateContainer()
+        private StandardKernel CreateContainer()
         {
-            var container = new Container(
-                configurator =>
-                {
-                    configurator.Scan(
-                        scanner =>
-                        {
-                            scanner.AssembliesAndExecutablesFromApplicationBaseDirectory();
-                            scanner.SingleImplementationsOfInterface();
-                            scanner.WithDefaultConventions();
-                        });
-                    configurator.For<IViewModelFactory>().CreateFactory();
-                    configurator.For<AddFilmViewModel>().Use<AddFilmViewModel>();
-                    configurator.For<AddFilmCrewViewModel>().Use<AddFilmCrewViewModel>();
-                    configurator.For<FilmCrewViewModel>().Use<FilmCrewViewModel>();
-                    configurator.For<FilmListViewModel>().Use<FilmListViewModel>();
-                    configurator.For<FilmViewModel>().Use<FilmViewModel>();
-                    configurator.For<ViewModelManager>().Use<ViewModelManager>().Singleton();
-                    configurator.ForConcreteType<FilmManager>().Configure.Singleton();
-                    configurator.For<IFilmProvider>().Use(config => config.GetInstance<FilmManager>());
-                    configurator.For<IFilmManager>().Use(config => config.GetInstance<FilmManager>());
-                }
-            );
+            var container = new StandardKernel();
+            
+            container.Bind(
+                configurator => configurator
+                .From("Cinema.Data.SqlClient", "Cinema.Domain", "Cinema.Presentation.Wpf")
+                .SelectAllClasses() 
+                .BindAllInterfaces()
+                .ConfigureFor<ViewModelManager>(config => config.InSingletonScope())
+                .ConfigureFor<FilmManager>(config => config.InSingletonScope())
+                );
+
+            container.Bind(
+                configurator => configurator
+                .From("Cinema.Presentation.Wpf")
+                .IncludingNonPublicTypes()
+                .SelectAllInterfaces()
+                .EndingWith("Factory")
+                .BindToFactory()
+                );
 
             return container;
         }
@@ -42,8 +37,8 @@ namespace Cinema.Presentation.Wpf
         {
             base.OnStartup(e);
 
-            Container container = CreateContainer();
-            MainWindowView mainView = container.GetInstance<MainWindowView>();
+            var container = CreateContainer();
+            MainWindowView mainView = container.Get<MainWindowView>();
             mainView.Show();
         }
     }

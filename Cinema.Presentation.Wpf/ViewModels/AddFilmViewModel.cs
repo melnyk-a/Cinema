@@ -16,6 +16,7 @@ namespace Cinema.Presentation.Wpf.ViewModels
         private readonly ICommand cancelCommand;
         private readonly IFilmManager filmManager;
 
+        private bool? hasBlurayRelease;
         private DateTime selectedDate;
         private Language selectedLanguage;
         private string title;
@@ -56,6 +57,12 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         public bool FilmCrewPrepared => addFilmCrewViewModel.IsFilmCrewReadyForSetUp;
 
+        public bool? HasBlurayRelease
+        {
+            get => hasBlurayRelease;
+            set => SetProperty(ref hasBlurayRelease, value);
+        }
+
         public DateTime SelectedDate
         {
             get => selectedDate;
@@ -76,12 +83,13 @@ namespace Cinema.Presentation.Wpf.ViewModels
 
         public void AddFilm()
         {
-            filmManager.AddFilm(new Film(Title, 
-                SelectedDate, 
-                SelectedLanguage, 
-                new FilmCrew(addFilmCrewViewModel.Director, 
-                    addFilmCrewViewModel.Actors))
-            );
+            Film film = new Film(Title, SelectedDate, SelectedLanguage, new FilmCrew(
+                addFilmCrewViewModel.Director,
+                addFilmCrewViewModel.Actors))
+            {
+                HasBlurayRelease = hasBlurayRelease
+            };
+            filmManager.AddFilm(film);
             ResetValues();
             ViewModelManager.SetFilmListViewModel();
         }

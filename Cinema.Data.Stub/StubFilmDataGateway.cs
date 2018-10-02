@@ -32,7 +32,10 @@ namespace Cinema.Data.Stub
                        new Actor(new Human("Cate", "Blanchett")),
                        new Actor(new Human("Owen", "Vaccaro"))
                     })
-             ));
+             )
+            {
+                HasBlurayRelease = true
+            });
             films.Add(new Film("Fahrenheit 11/9",
                 DateTime.Parse("21 September 2018"),
                 Language.English,
@@ -44,7 +47,10 @@ namespace Cinema.Data.Stub
                        new Actor(new Human("Michael", "Moore")),
                        new Actor(new Human("Alexandria", "Ocasio-Cortez"))
                     })
-             ));
+             )
+            {
+                HasBlurayRelease = false
+            });
             films.Add(new Film("Life Itself",
                DateTime.Parse("21 September 2018"),
                Language.Spanish,

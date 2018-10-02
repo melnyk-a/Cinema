@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Cinema.Data.XmlXDocument
+﻿namespace Cinema.Data.XmlXDocument
 {
     public sealed class XmlXDocumentFilmDataService : IFilmDataService
     {

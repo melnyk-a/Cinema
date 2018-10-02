@@ -6,18 +6,109 @@
              Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" 
-                 ItemsSource="{Binding Films}">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type ViewModels:FilmViewModel}">
-                    <TextBlock Text="{Binding Title}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="100"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition MinWidth="250"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0"
+                     ItemsSource="{Binding Films}"
+                     SelectedItem="{Binding SelectedFilm}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type ViewModels:FilmViewModel}">
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <GridSplitter Grid.Column="1"
+                          Width="3"
+                          HorizontalAlignment="Stretch"/>
+            <StackPanel Grid.Column="2">
+                <TextBlock Padding="5" Text="{Binding SelectedFilm.Title}"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="0"
+                                Orientation="Horizontal">
+                        <TextBlock Padding="5,0"
+                                   FontSize="10"
+                                   Text="Release date:"/>
+                        <TextBlock FontSize="10"
+                                   Text="{Binding SelectedFilm.ReleaseDate}"
+                                   FontStyle="Italic"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="2"
+                                Orientation="Horizontal">
+                        <TextBlock Padding="5,0"
+                                   FontSize="10"
+                                   Text="Language:"/>
+                        <TextBlock FontSize="10"
+                                   Text="{Binding SelectedFilm.Language}"
+                                   FontStyle="Italic"/>
+                    </StackPanel>
+                </Grid>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Padding="5"
+                               Text="Director:"
+                               FontWeight="DemiBold"/>
+                    <TextBlock Padding="5" Grid.Row="0"
+                           Grid.Column="2"
+                           Text ="{Binding SelectedFilm.Director}"/>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Padding="5"
+                               Text="Actors:"
+                               FontWeight="DemiBold"/>
+                    <ItemsControl Grid.Row="2"
+                                  Grid.Column="2"
+                                  Padding="5"
+                                  Width="Auto"
+                                  ItemsSource="{Binding SelectedFilm.Actors}">
+                    </ItemsControl>
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="0"
+                               Padding="5"
+                               Text="Blu-ray release:"
+                               FontWeight="DemiBold"/>
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="2"
+                               Padding="5"
+                               Text="{Binding SelectedFilm.HasBluray}"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
         <Button Grid.Row="2"
                 Width="80"
                 Content="Add film"

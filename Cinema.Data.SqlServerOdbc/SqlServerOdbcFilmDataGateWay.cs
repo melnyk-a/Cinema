@@ -4,6 +4,7 @@ using Cinema.Utilities.Data.Dtos;
 using Cinemas;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Odbc;
 
@@ -17,7 +18,10 @@ namespace Cinema.Data.SqlServerOdbc
         {
             connection = new Lazy<OdbcConnection>(() =>
             {
-                var connection = new OdbcConnection($"Driver={{SQL Server}};Server=(local);Database=Films;Trusted_Security=Yes;");
+                string connectionString = ConfigurationManager
+                   .ConnectionStrings["OdbcConnection"]
+                   .ConnectionString;
+                var connection = new OdbcConnection(connectionString);
                 connection.Open();
 
                 return connection;
@@ -25,6 +29,15 @@ namespace Cinema.Data.SqlServerOdbc
         }
 
         private OdbcConnection Connection => connection.Value;
+
+        private void AddBlurayRelease(OdbcCommand command, int filmId, bool hasBlurayRelease)
+        {
+            string value = hasBlurayRelease? "1" : "0";
+            command.CommandText = $@"update Films 
+                                    set HasBlurayRelease = {value} 
+                                    where Id = {filmId}";
+            command.ExecuteNonQuery();
+        }
 
         public void AddFilm(Film film)
         {
@@ -36,8 +49,12 @@ namespace Cinema.Data.SqlServerOdbc
             {
                 int langageId = GetLanguageId(command, film.Language);
                 int filmId = FillFilmsTable(command, film.Title, film.ReleaseDate, langageId);
+                if (film.HasBlurayRelease != null)
+                {
+                    AddBlurayRelease(command, filmId, film.HasBlurayRelease.Value);
+                }
                 FillDirectorsTable(command, film.FilmCrew.Director, filmId);
-                foreach(Actor actor in film.FilmCrew.Actors)
+                foreach (Actor actor in film.FilmCrew.Actors)
                 {
                     FillActorsTable(command, actor, filmId);
                 }
@@ -102,7 +119,7 @@ namespace Cinema.Data.SqlServerOdbc
             Director director = CreateDirector(filmDto);
             IEnumerable<Actor> actors = CreateActorsList(filmDto);
 
-            return new Film(filmDto.Title, filmDto.ReleaseDate, filmDto.Language, new FilmCrew(director, actors));
+            return new Film(filmDto.Title, filmDto.ReleaseDate, filmDto.Language, new FilmCrew(director, actors)) { HasBlurayRelease = filmDto.HasBlurayRelease };
         }
 
         protected override void Dispose(bool disposing)
@@ -181,7 +198,7 @@ namespace Cinema.Data.SqlServerOdbc
             var filmsDtos = new List<FilmDto>();
 
             var command = new OdbcCommand(
-                @"select Films.Id, Title, Languages.Name as Language, ReleaseDate
+                @"select Films.Id, Title, Languages.Name as Language, ReleaseDate, HasBlurayRelease
                   from Films inner join Languages on Films.LanguageId = Languages.Id",
                 Connection
             );
@@ -190,13 +207,17 @@ namespace Cinema.Data.SqlServerOdbc
             {
                 while (reader.Read())
                 {
+
                     var filmDto = new FilmDto
                     {
                         Id = (int)reader["Id"],
                         Language = (Language)Enum.Parse(typeof(Language), (string)reader["Language"]),
                         ReleaseDate = (DateTime)reader["ReleaseDate"],
-                        Title = (string)reader["Title"]
+                        Title = (string)reader["Title"],
                     };
+                    object blurayRelease = reader["HasBlurayRelease"];
+                    filmDto.HasBlurayRelease = Convert.IsDBNull(blurayRelease) ? null : (bool?)blurayRelease;
+
                     filmsDtos.Add(filmDto);
                 }
             }
