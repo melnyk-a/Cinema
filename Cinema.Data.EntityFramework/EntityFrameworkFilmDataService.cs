@@ -1,6 +1,6 @@
 ﻿namespace Cinema.Data.EntityFramework
 {
-    internal sealed class EntityFrameworkFilmDataService : IFilmDataService
+    public sealed class EntityFrameworkFilmDataService : IFilmDataService
     {
         public IFilmDataGateway OpenDataGateway()
         {
