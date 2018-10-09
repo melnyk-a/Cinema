@@ -5,6 +5,16 @@ namespace Cinema.Data.EntityFramework
 {
     internal sealed class FilmDbContext : DbContext
     {
-        DbSet<FilmDto> Films { get; set; }
+        public FilmDbContext() :
+            base("EntityFrameworkConnection")
+        {
+        }
+
+        public DbSet<FilmDto> Films { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+        }
     }
 }
