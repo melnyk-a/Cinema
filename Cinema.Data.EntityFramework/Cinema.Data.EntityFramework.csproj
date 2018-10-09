@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="EntityFrameworkFilmDataGateway.cs" />
     <Compile Include="EntityFrameworkFilmDataService.cs" />
+    <Compile Include="FilmDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
