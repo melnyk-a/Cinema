@@ -1,4 +1,4 @@
-﻿using Cinema.Utilities.Data.Dtos;
+﻿using Cinema.Data.EntityFramework.Dtos;
 using System.Data.Entity;
 
 namespace Cinema.Data.EntityFramework
@@ -9,6 +9,8 @@ namespace Cinema.Data.EntityFramework
             base("EntityFrameworkConnection")
         {
         }
+
+        public DbSet<FilmCrewDto> FilmCrews { get; set; }
 
         public DbSet<FilmDto> Films { get; set; }
 
