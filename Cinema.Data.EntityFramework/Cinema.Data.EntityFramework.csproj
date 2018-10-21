@@ -48,6 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\ActorDto.cs" />
+    <Compile Include="Dtos\DirectorDto.cs" />
+    <Compile Include="Dtos\FilmCrewDto.cs" />
+    <Compile Include="Dtos\FilmDto.cs" />
+    <Compile Include="Dtos\HumanDto.cs" />
     <Compile Include="EntityFrameworkFilmDataGateway.cs" />
     <Compile Include="EntityFrameworkFilmDataService.cs" />
     <Compile Include="FilmDbContext.cs" />
