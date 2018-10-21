@@ -16,6 +16,8 @@ namespace Cinema.Data.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     }
