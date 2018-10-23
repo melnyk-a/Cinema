@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{92EA5FB4-DBCC-417D-BB9B-74D68FE5B99B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cinema.Data.EntityFramework</RootNamespace>
+    <AssemblyName>Cinema.Data.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dtos\ActorDto.cs" />
+    <Compile Include="Dtos\DirectorDto.cs" />
+    <Compile Include="Dtos\FilmCrewDto.cs" />
+    <Compile Include="Dtos\FilmDto.cs" />
+    <Compile Include="Dtos\HumanDto.cs" />
+    <Compile Include="EntityFrameworkFilmDataGateway.cs" />
+    <Compile Include="EntityFrameworkFilmDataService.cs" />
+    <Compile Include="FilmDbContext.cs" />
+    <Compile Include="Migrations\201810211821286_Initial.cs" />
+    <Compile Include="Migrations\201810211821286_Initial.Designer.cs">
+      <DependentUpon>201810211821286_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810231852251_ActorTableUpdate.cs" />
+    <Compile Include="Migrations\201810231852251_ActorTableUpdate.Designer.cs">
+      <DependentUpon>201810231852251_ActorTableUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cinema.Data\Cinema.Data.csproj">
+      <Project>{5bd46295-1197-415b-b456-b097fff1d680}</Project>
+      <Name>Cinema.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Domain.Models\Cinema.Domain.Models.csproj">
+      <Project>{875df3a0-6277-433d-9418-a99877b391e3}</Project>
+      <Name>Cinema.Domain.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.Utilities.Data\Cinema.Utilities.Data.csproj">
+      <Project>{217c18d9-ff7a-46da-a671-6912fe159c37}</Project>
+      <Name>Cinema.Utilities.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinemas\Cinemas.csproj">
+      <Project>{46de9aa0-188b-415a-bb3e-1d14e11ecb81}</Project>
+      <Name>Cinemas</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810211821286_Initial.resx">
+      <DependentUpon>201810211821286_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810231852251_ActorTableUpdate.resx">
+      <DependentUpon>201810231852251_ActorTableUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

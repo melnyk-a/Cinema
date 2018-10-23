@@ -139,6 +139,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cinema.Data.EntityFramework\Cinema.Data.EntityFramework.csproj">
+      <Project>{92ea5fb4-dbcc-417d-bb9b-74d68fe5b99b}</Project>
+      <Name>Cinema.Data.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cinema.Data.SqlClient\Cinema.Data.SqlClient.csproj">
       <Project>{2c8e7e3c-f8e4-46ae-963a-722161769d7f}</Project>
       <Name>Cinema.Data.SqlClient</Name>
