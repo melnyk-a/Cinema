@@ -19,6 +19,12 @@ namespace Cinema.Data.EntityFramework
             base.OnModelCreating(modelBuilder);
 
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+
+            modelBuilder
+        .Entity<FilmCrewDto>()
+        .HasMany(x => x.ActorDtos)
+        .WithRequired()
+        .WillCascadeOnDelete(false);
         }
     }
 }
